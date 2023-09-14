@@ -3,7 +3,8 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
 import FIcon from 'react-native-vector-icons/Feather'
-import Icon from 'react-native-vector-icons/Feather'
+import Icon from 'react-native-vector-icons/AntDesign'
+import BottomNav from '../components/BottomNav'
 
 export default function HomeScreen() {
   return (
@@ -42,7 +43,12 @@ export default function HomeScreen() {
                 </View>
           </View>
 
-          <ScrollView style={tailwind`flex-1`}>
+          <BottomNav />
+
+          <ScrollView style={tailwind`flex-1`} 
+                         contentContainerStyle={{
+                              paddingBottom: 70
+               }}>
             {/* ADVERT */}
                 <View style={tailwind`w-full  overflow-hidden`}>
                     <View style={tailwind`w-[90%] mx-auto rounded-lg overflow-hidden`}>
@@ -99,6 +105,78 @@ export default function HomeScreen() {
                                     <Text style={tailwind`text-black text-xs text-center font-bold`}>Bakery</Text>
                               </TouchableOpacity>
                       </ScrollView>
+                </View>
+
+                <View style={tailwind`flex-1`}>
+                        <View style={tailwind`w-[90%] mx-auto flex-row justify-between flex-wrap gap-5`}>
+                              <View style={tailwind`w-[150px] p-3 border border-2 border-gray-200 rounded-lg`}>
+                                    <View style={tailwind`flex-row items-center justify-center gap-1 my-1`}>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                    </View>
+                                    <Text style={tailwind`font-semibold text-center text-[15px]`}>Greek Pizza</Text>
+                                    <Text style={tailwind`font-light text-[11px] text-gray-400 text-center`}>Pizza Hut</Text>
+                                    <View style={tailwind`flex-row justify-between items-center mt-2`}>
+                                          <Text style={tailwind`font-extrabold`}>$2.40</Text>
+                                          <TouchableOpacity style={tailwind`bg-[#FA5758] p-2 rounded-full`}>
+                                                <FIcon name='shopping-cart' size={15} color='white'/>
+                                          </TouchableOpacity>
+                                    </View>
+                              </View>
+
+                              <View style={tailwind`w-[150px]  p-3 border border-2 border-gray-200 rounded-lg`}>
+                                    <View style={tailwind`flex-row items-center justify-center gap-1 my-1`}>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                    </View>
+                                    <Text style={tailwind`font-semibold text-center text-[15px]`}>Greek Pizza</Text>
+                                    <Text style={tailwind`font-light text-[11px] text-gray-400 text-center`}>Pizza Hut</Text>
+                                    <View style={tailwind`flex-row justify-between items-center mt-2`}>
+                                          <Text style={tailwind`font-extrabold`}>$2.40</Text>
+                                          <TouchableOpacity style={tailwind`bg-[#FA5758] p-2 rounded-full`}>
+                                                <FIcon name='shopping-cart' size={15} color='white'/>
+                                          </TouchableOpacity>
+                                    </View>
+                              </View>
+
+                              <View style={tailwind`w-[150px] p-3 border border-2 border-gray-200 rounded-lg`}>
+                                    <View style={tailwind`flex-row items-center justify-center gap-1 my-1`}>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                    </View>
+                                    <Text style={tailwind`font-semibold text-center text-[15px]`}>Greek Pizza</Text>
+                                    <Text style={tailwind`font-light text-[11px] text-gray-400 text-center`}>Pizza Hut</Text>
+                                    <View style={tailwind`flex-row justify-between items-center mt-2`}>
+                                          <Text style={tailwind`font-extrabold`}>$2.40</Text>
+                                          <TouchableOpacity style={tailwind`bg-[#FA5758] p-2 rounded-full`}>
+                                                <FIcon name='shopping-cart' size={15} color='white'/>
+                                          </TouchableOpacity>
+                                    </View>
+                              </View>
+
+                              <View style={tailwind`w-[150px] p-3 border border-2 border-gray-200 rounded-lg`}>
+                                    <View style={tailwind`flex-row items-center justify-center gap-1 my-1`}>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                                <Icon name='star' size={13} color='#FA5758'/>
+                                    </View>
+                                    <Text style={tailwind`font-semibold text-center text-[15px]`}>Greek Pizza</Text>
+                                    <Text style={tailwind`font-light text-[11px] text-gray-400 text-center`}>Pizza Hut</Text>
+                                    <View style={tailwind`flex-row justify-between items-center mt-2`}>
+                                          <Text style={tailwind`font-extrabold`}>$2.40</Text>
+                                          <TouchableOpacity style={tailwind`bg-[#FA5758] p-2 rounded-full`}>
+                                                <FIcon name='shopping-cart' size={15} color='white'/>
+                                          </TouchableOpacity>
+                                    </View>
+                              </View>
+
+                        </View>
                 </View>
           </ScrollView>
     </SafeAreaView>
