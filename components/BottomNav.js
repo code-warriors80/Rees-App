@@ -1,23 +1,22 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import tailwind from 'twrnc'
 import FIcon from 'react-native-vector-icons/Feather'
 import Icon from 'react-native-vector-icons/AntDesign'
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function BottomNav() {
+     const navigation = useNavigation()
   return (
-    <View style={tailwind`bg-[#FA5758] absolute w-full flex-row items-center justify-around bottom-0 z-50 rounded-tl-20 rounded-tr-20 py-4`}>
-               <TouchableOpacity>
-                               <FIcon name='home' size={20} color='white'/>
+    <View style={tailwind`bg-[#FA5758] absolute w-full flex-row items-center justify-around bottom-0 z-50 rounded-tl-20 rounded-tr-20 py-2`}>
+               <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full`} onPress={() => navigation.navigate('Home')}>
+                    <Image source={require('../assets/icons/home.png')} style={tailwind`w-7 h-7`}/>
                </TouchableOpacity>
-               <TouchableOpacity>
-                              <FIcon name='heart' size={20} color='black'/>
+               <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+                    <Image source={require('../assets/icons/basket.png')} style={tailwind`w-7 h-7`}/>
                </TouchableOpacity>
-               <TouchableOpacity>
-                              <FIcon name='shopping-bag' size={20} color='black'/>
-               </TouchableOpacity>
-               <TouchableOpacity>
-                              <FIcon name='user' size={20} color='black'/>
+               <TouchableOpacity onPress={() => navigation.navigate('Location')}>
+                    <Image source={require('../assets/icons/user.png')} style={tailwind`w-7 h-7`}/>
                </TouchableOpacity>
     </View>
   )

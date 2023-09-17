@@ -1,10 +1,11 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function LocationScreen() {
   return (
-    <View>
+    <SafeAreaView>
       <Text>LocationScreen</Text>
-    </View>
+    </SafeAreaView>
   )
 }
