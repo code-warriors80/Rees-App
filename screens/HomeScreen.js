@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, Image, Button, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Image,ScrollView } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
