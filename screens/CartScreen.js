@@ -20,7 +20,7 @@ export default function CartScreen() {
 
       <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
 
-          <View style={tailwind`bg-white rounded-lg shadow-sm flex-row items-center p-2 m-2`}>
+          <View style={tailwind`bg-white rounded-lg shadow flex-row items-center p-2 m-2`}>
               <Image source={require('../assets/food/burger.png')} style={tailwind`w-19 h-19`}/>
 
               <View style={tailwind`flex-1 mx-2`}>
@@ -48,7 +48,7 @@ export default function CartScreen() {
           </View>
             
 
-            <View style={tailwind`bg-white rounded-lg shadow-sm flex-row items-center p-2 m-2`}>
+            <View style={tailwind`bg-white rounded-lg shadow flex-row items-center p-2 m-2`}>
                   <Image source={require('../assets/food/burger.png')} style={tailwind`w-19 h-19`}/>
                   <View style={tailwind`flex-1 mx-2`}>
                         <View style={tailwind`flex-row items-start justify-between mb-1`}>
@@ -75,7 +75,7 @@ export default function CartScreen() {
             </View>
       </ScrollView>
 
-      <View style={tailwind`bg-white py-3 px-2 flex-row items-center justify-between mb-4 rounded-lg shadow-sm mt-1`}>
+      {/* <View style={tailwind`bg-white py-3 px-2 flex-row items-center justify-between mb-4 rounded-lg shadow-sm mt-1`}>
           <View style={tailwind`flex-row items-center gap-3 ml-2`}>
               <Image source={require('../assets/icons/cupon.png')} style={tailwind`w-5 h-5`}/>
               <Text style={tailwind`font-bold text-xs`}>Promo Code</Text>
@@ -83,7 +83,7 @@ export default function CartScreen() {
           <TouchableOpacity style={tailwind`bg-[#FA5758] p-2 px-4 rounded-lg`}>
               <Text style={tailwind`text-white text-xs`}>Apply</Text>
           </TouchableOpacity>
-      </View>
+      </View> */}
 
       <View style={tailwind`bg-white shadow-sm rounded-lg`}>
           <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>

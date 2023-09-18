@@ -15,7 +15,7 @@ export default function BottomNav() {
                <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
                     <Image source={require('../assets/icons/basket.png')} style={tailwind`w-7 h-7`}/>
                </TouchableOpacity>
-               <TouchableOpacity onPress={() => navigation.navigate('Location')}>
+               <TouchableOpacity onPress={() => navigation.navigate('About')}>
                     <Image source={require('../assets/icons/user.png')} style={tailwind`w-7 h-7`}/>
                </TouchableOpacity>
     </View>

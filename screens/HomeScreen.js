@@ -16,7 +16,6 @@ export default function HomeScreen() {
       let item = params;
   return (
     <SafeAreaView style={tailwind`flex-1 bg-white`}>
-      <BottomNav />
 
             
             <View>
@@ -88,7 +87,9 @@ export default function HomeScreen() {
                                                 <Text style={tailwind`font-bold text-[15px] mb-1`}>{myclass.title}</Text>
                                                 <Text style={tailwind`font-light text-xs text-gray-600`}>{myclass.description}</Text>
                                           </View>
-                                          <Text style={tailwind`text-[#FA5758] font-light text-xs`}>View All</Text>
+                                          <TouchableOpacity>
+                                                <Text style={tailwind`text-[#FA5758] font-light text-xs`}>View All</Text>
+                                          </TouchableOpacity>
                                     </View>
 
                                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tailwind`w-[90%] mx-auto mr-5`}>
@@ -104,6 +105,7 @@ export default function HomeScreen() {
 
                   </View>
             </ScrollView>
+            <BottomNav />
     </SafeAreaView>
   )
 }

@@ -7,7 +7,7 @@ export default function DescFood({food}) {
       const navigation = useNavigation()
   return (
 
-                            <View style={tailwind`w-[150px] bg-white  p-3 rounded-lg shadow-lg my-5 mx-2`}>
+                            <View style={tailwind`w-[150px] bg-white  p-3 rounded-lg shadow my-5 mx-2`}>
                                     <View style={tailwind`flex items-center justify-center`}>
                                           <Image source={food.image} style={tailwind`w-20 h-20`} sharedTransitionTag="tag"/>
                                     </View>
@@ -18,7 +18,7 @@ export default function DescFood({food}) {
                                           <Image source={require('../assets/icons/star.png')} style={tailwind`w-3 h-3`}/>
                                     </View>
                                     <TouchableOpacity onPress={() => navigation.navigate('FoodProfile', {...food})}>
-                                          <Text style={tailwind`font-bold text-center text-sm text-[15px]`}>{food.name}</Text>
+                                          <Text style={tailwind`font-bold text-center text-[14px]`}>{food.name}</Text>
                                     </TouchableOpacity>
                                     <Text style={tailwind`font-light text-[11px] text-gray-400 text-center`}>{food.category}</Text>
                                     <View style={tailwind`flex-row justify-between items-center mt-1`}>
