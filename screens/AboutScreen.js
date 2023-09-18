@@ -6,7 +6,7 @@ import tailwind from 'twrnc'
 import { ScrollView } from 'react-native'
 import { Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import MapView from 'react-native-maps'
+import MapView, {Marker} from 'react-native-maps'
 
 export default function AboutScreen() {
   const navigation = useNavigation()
