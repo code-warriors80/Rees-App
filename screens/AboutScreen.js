@@ -36,7 +36,7 @@ export default function AboutScreen() {
 
                             <ScrollView key={index} horizontal showsHorizontalScrollIndicator={false}>
                             {abt.chefs.map((chef, index) => (
-                                <View style={tailwind`mr-5`}>
+                                <View key={index} style={tailwind`mr-5`}>
                                     <Image source={chef.image} style={tailwind`w-12 h-12 rounded-full mx-auto`}/>
                                     <Text style={tailwind`text-[10px] text-center mt-2`}>{chef.name}</Text>
                                 </View>
