@@ -170,3 +170,54 @@ export const foodsclass = [
                   ]
                }
 ]
+
+export const about = [
+    {
+        id: 1,
+        image: require('../assets/5526265.jpg'),
+        name: 'Ree\'s Kitchen',
+        email: "@Ree's_Kitchen",
+        address: 'Sabon Gari Zaria Kaduna State',
+        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, ipsum nostrum doloribus iure neque voluptates numquam nesciunt aperiam impedit quas et repudiandae voluptas error at saepe exercitationem, repellat ipsam. Sunt',
+        socials: [
+            {
+                id: 1,
+                title: 'Facebook',
+                name: 'facebook',
+                value: 'Ree\'s Kitchen',
+                bgcolor: 'bg-blue-500'
+            },
+            {
+                id: 2,
+                title: 'Instagram',
+                name: 'instagram',
+                value: 'Ree\'s Kitchen',
+                bgcolor: 'bg-[#FA5758]'
+            },
+            {
+                id: 3,
+                title: 'Contact',
+                name: 'phone',
+                value: '08116934763',
+                bgcolor: 'bg-green-500'
+            }
+        ],
+        chefs: [
+            {
+                id: 1,
+                image: require('../assets/1.jpg'),
+                name: 'Samuel Tobi'
+            },
+            {
+                id: 2,
+                image: require('../assets/2.jpg'),
+                name: 'Rejoice Mike'
+            },
+            {
+                id: 3,
+                image: require('../assets/3.jpg'),
+                name: 'Sandra Sam'
+            }
+        ]
+    }
+]
