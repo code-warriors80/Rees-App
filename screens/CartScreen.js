@@ -47,7 +47,7 @@ export default function CartScreen() {
           let dish = items[0]
           return(
               <View key={key} style={tailwind`bg-white rounded-lg shadow flex-row items-center p-2 m-2`}>
-                  <Image source={require('../assets/food/burger.png')} style={tailwind`w-19 h-19`}/>
+                  <Image source={dish.image} style={tailwind`w-19 h-19`}/>
 
                   <View style={tailwind`flex-1 mx-2`}>
                       <View style={tailwind`flex-row items-start justify-between mb-1`}>

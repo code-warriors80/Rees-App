@@ -5,15 +5,25 @@ import FIcon from 'react-native-vector-icons/Feather'
 import tailwind from 'twrnc'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setFood } from '../slice/foodSlice'
+import { removeFromCart, selectCartItemById, addToCart } from '../slice/cartSlice'
 
 export default function FoodprofileScreen() {
   const {params} = useRoute();
   const navigation = useNavigation()
   let item = params;
+  const totalItems = useSelector(state => selectCartItemById(state, item.id))
 
   const dispatch = useDispatch()
+
+  const handleIncrease = () => {
+          dispatch(addToCart({...item}))
+  }
+
+  const handleDecrease = () => {
+    dispatch(removeFromCart({id: item.id}))
+}
   
   useEffect(()=> {
     if(item && item.id)
@@ -44,17 +54,17 @@ export default function FoodprofileScreen() {
 
               <View>
                   <View style={tailwind`flex-row items-center justify-center gap-3 my-3 shadow-lg`}>
-                      <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full shadow-sm`}>
+                      <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full shadow-sm`} onPress={(handleDecrease)}>
                         <Icon name='minus' size={15} color='black'/>
                       </TouchableOpacity>
 
-                      <Text style={tailwind`font-bold text-lg`}>2</Text>
+                      <Text style={tailwind`font-bold text-lg`}>{totalItems.length}</Text>
 
-                      <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full shadow-sm`}>
+                      <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full shadow-sm`} onPress={handleIncrease}>
                           <Icon name='plus' size={15} color='black'/>
                       </TouchableOpacity>
                   </View>
-                  <Text style={tailwind`font-light text-center text-gray-500`}>$24.40</Text>
+                  <Text style={tailwind`font-light text-center text-gray-500`}>$ {item.price * totalItems.length}</Text>
               </View>
 
               <View style={tailwind`flex-row items-center justify-between mt-7`}>
