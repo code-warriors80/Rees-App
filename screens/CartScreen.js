@@ -6,7 +6,7 @@ import tailwind from 'twrnc'
 import Icon from 'react-native-vector-icons/Feather'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart, selectCartItem, selectCartItemById, selectCartTotal } from '../slice/cartSlice'
+import { addToCart, removeFromCart, selectCartItem,  selectCartTotal } from '../slice/cartSlice'
 
 
 export default function CartScreen() {
@@ -16,7 +16,7 @@ export default function CartScreen() {
   const cartTotal = useSelector(selectCartTotal)
   const [groupitems, setGroupItems] = useState({})
 
-  const delivery = 10
+  const delivery = 300
 
   useEffect(() => {
     const items = cartItems.reduce((group, item) => {

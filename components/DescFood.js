@@ -2,13 +2,12 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import tailwind from 'twrnc'
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, selectCartItemById } from '../slice/cartSlice';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../slice/cartSlice';
 
 export default function DescFood({food}) {
       const navigation = useNavigation()
       const dispatch = useDispatch()
-      const totalItems = useSelector(state=> selectCartItemById(state, food.id))
 
       const handleIncrease = () => {
             if({id: food.id})

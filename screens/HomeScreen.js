@@ -1,8 +1,7 @@
-import { View, Text, TouchableOpacity, TextInput, Image, Button, ScrollView } from 'react-native'
-import React, {useState} from 'react'
+import { View, Text, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native'
+import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
-import FIcon from 'react-native-vector-icons/Feather'
 import BottomNav from '../components/BottomNav'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { foodsclass } from '../constant'
@@ -16,8 +15,6 @@ export default function HomeScreen() {
       let item = params;
   return (
     <SafeAreaView style={tailwind`flex-1 bg-white`}>
-
-            
             <View>
                   {/* HEADER START */}
                   <View style={tailwind`flex-row items-center justify-between p-4 py-3`}>
