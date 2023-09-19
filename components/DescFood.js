@@ -2,9 +2,25 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import tailwind from 'twrnc'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, selectCartItemById } from '../slice/cartSlice';
 
 export default function DescFood({food}) {
       const navigation = useNavigation()
+      const dispatch = useDispatch()
+      const totalItems = useSelector(state=> selectCartItemById(state, food.id))
+
+      const handleIncrease = () => {
+            if({id: food.id})
+            {
+                  dispatch(addToCart({...food}))
+            }
+            else
+            {
+                  console.log('items exist');
+            }
+            
+      }
   return (
 
                             <View style={tailwind`w-[150px] bg-white  p-3 rounded-lg shadow my-5 mx-2`}>
@@ -23,8 +39,8 @@ export default function DescFood({food}) {
                                     <Text style={tailwind`font-light text-[11px] text-gray-400 text-center`}>{food.category}</Text>
                                     <View style={tailwind`flex-row justify-between items-center mt-1`}>
                                           <Text style={tailwind`font-extrabold`}>${food.price}</Text>
-                                          <TouchableOpacity style={tailwind`rounded-full bg-gray-200 p-2`}>
-                                                <Image source={require('../assets/icons/basket.png')} style={tailwind`w-5 h-5`}/>
+                                          <TouchableOpacity onPress={handleIncrease} style={tailwind`rounded-full bg-gray-200 p-2`}>
+                                                <Image source={require('../assets/icons/cart.png')} style={tailwind`w-5 h-5`}/>
                                           </TouchableOpacity>
                                     </View>
                             </View>

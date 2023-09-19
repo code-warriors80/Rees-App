@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput, Image, Button, ScrollView } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
 import FIcon from 'react-native-vector-icons/Feather'
@@ -39,7 +39,7 @@ export default function HomeScreen() {
                   <View style={tailwind`p-2 px-4 flex-row items-center justify-between`}>
                         <View style={tailwind`flex-1 border border-2 border-gray-200 flex-row items-center gap-3 p-2 rounded-lg`}>
                                     <Image source={require('../assets/icons/search.png')} style={tailwind`w-5 h-5`}/>
-                                    <TextInput placeholder='Search Food & Snacks' style={tailwind`flex-1 text-xs text-gray-600`}/>
+                                    <TextInput placeholder='Search Food & Snacks' style={tailwind`flex-1 text-xs text-gray-600`} />
                                     <Image source={require('../assets/icons/mic.png')} style={tailwind`w-5 h-5`}/>
                         </View>
 

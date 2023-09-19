@@ -1,13 +1,37 @@
 import { View, Text , TouchableOpacity, ScrollView, Image} from 'react-native'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FIcon from 'react-native-vector-icons/Feather'
 import tailwind from 'twrnc'
 import Icon from 'react-native-vector-icons/Feather'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart, selectCartItem, selectCartItemById, selectCartTotal } from '../slice/cartSlice'
+
 
 export default function CartScreen() {
+  const dispatch = useDispatch()
   const navigation = useNavigation()
+  const cartItems = useSelector(selectCartItem)
+  const cartTotal = useSelector(selectCartTotal)
+  const [groupitems, setGroupItems] = useState({})
+
+  const delivery = 10
+
+  useEffect(() => {
+    const items = cartItems.reduce((group, item) => {
+      if(group[item.id]){
+        group[item.id].push(item)
+      }
+      else
+      {
+        group[item.id] = [item]
+      }
+      return group
+    }, {})
+    setGroupItems(items)
+  }, [cartItems])
+
   return (
     <SafeAreaView style={tailwind`px-5 py-3 flex-1 bg-white`}>
         <View style={tailwind`flex-row items-center justify-between pb-3`}>
@@ -18,62 +42,38 @@ export default function CartScreen() {
             <Text style={tailwind`text-[16px] font-bold mx-auto`}>My Basket</Text>
         </View>
 
-      <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
+        <ScrollView style={tailwind`flex-1`}>
+        {Object.entries(groupitems).map(([key, items]) => {
+          let dish = items[0]
+          return(
+              <View key={key} style={tailwind`bg-white rounded-lg shadow flex-row items-center p-2 m-2`}>
+                  <Image source={require('../assets/food/burger.png')} style={tailwind`w-19 h-19`}/>
 
-          <View style={tailwind`bg-white rounded-lg shadow flex-row items-center p-2 m-2`}>
-              <Image source={require('../assets/food/burger.png')} style={tailwind`w-19 h-19`}/>
-
-              <View style={tailwind`flex-1 mx-2`}>
-                  <View style={tailwind`flex-row items-start justify-between mb-1`}>
-                      <View style={tailwind``}>
-                        <Text style={tailwind`font-bold`}>Melting Cheese</Text>
-                        <Text style={tailwind`text-xs text-gray-400`}>Pizza bar</Text>
+                  <View style={tailwind`flex-1 mx-2`}>
+                      <View style={tailwind`flex-row items-start justify-between mb-1`}>
+                          <View style={tailwind``}>
+                            <Text style={tailwind`font-bold`}>{dish.name}</Text>
+                            <Text style={tailwind`text-xs text-gray-400`}>{dish.category}</Text>
+                          </View>
+                          <Text style={tailwind`font-bold text-xs text-gray-700`}>${dish.price * items.length}</Text>
                       </View>
-                      <Text style={tailwind`font-bold text-xs text-gray-700`}>$25.00</Text>
-                  </View>
 
-                  <View style={tailwind`flex-row items-center justify-between`}>
-                    <Text style={tailwind`text-xs`}><Text style={tailwind`text-xs text-[#FA5758]`}>$ </Text>8.44</Text>
-                      <View style={tailwind`flex-row items-center gap-3`}>
-                        <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`}>
-                          <Icon name='minus' size={12} color='black'/>
-                        </TouchableOpacity>
-                        <Text style={tailwind`font-bold text-sm`}>2</Text>
-                        <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`}>
-                            <Icon name='plus' size={12} color='black'/>
-                        </TouchableOpacity>
+                      <View style={tailwind`flex-row items-center justify-between`}>
+                        <Text style={tailwind`text-xs`}><Text style={tailwind`text-xs text-[#FA5758]`}>$ </Text>{dish.price}</Text>
+                          <View style={tailwind`flex-row items-center gap-3`}>
+                            <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`} onPress={() => dispatch(removeFromCart({id: dish.id}))}>
+                              <Icon name='minus' size={12} color='black'/>
+                            </TouchableOpacity>
+                            <Text style={tailwind`font-bold text-sm`}>{items.length}</Text>
+                            <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`} onPress={() => dispatch(addToCart({...dish}))}>
+                                <Icon name='plus' size={12} color='black'/>
+                            </TouchableOpacity>
+                          </View>
                       </View>
                   </View>
               </View>
-          </View>
-            
-
-            <View style={tailwind`bg-white rounded-lg shadow flex-row items-center p-2 m-2`}>
-                  <Image source={require('../assets/food/burger.png')} style={tailwind`w-19 h-19`}/>
-                  <View style={tailwind`flex-1 mx-2`}>
-                        <View style={tailwind`flex-row items-start justify-between mb-1`}>
-                              <View style={tailwind``}>
-                                <Text style={tailwind`font-bold`}>Melting Cheese</Text>
-                                <Text style={tailwind`text-xs text-gray-400`}>Pizza bar</Text>
-                              </View>
-                              <Text style={tailwind`font-bold text-xs text-gray-700`}>$25.00</Text>
-                        </View>
-
-                        <View style={tailwind`flex-row items-center justify-between`}>
-                            <Text style={tailwind`text-xs`}><Text style={tailwind`text-xs text-[#FA5758]`}>$ </Text>8.44</Text>
-                            <View style={tailwind`flex-row items-center gap-3`}>
-                              <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`}>
-                                <Icon name='minus' size={12} color='black'/>
-                              </TouchableOpacity>
-                              <Text style={tailwind`font-bold text-sm`}>2</Text>
-                              <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`}>
-                                  <Icon name='plus' size={12} color='black'/>
-                              </TouchableOpacity>
-                            </View>
-                        </View>
-                  </View>
-            </View>
-      </ScrollView>
+          )})}
+          </ScrollView>
 
       {/* <View style={tailwind`bg-white py-3 px-2 flex-row items-center justify-between mb-4 rounded-lg shadow-sm mt-1`}>
           <View style={tailwind`flex-row items-center gap-3 ml-2`}>
@@ -88,17 +88,17 @@ export default function CartScreen() {
       <View style={tailwind`bg-white shadow-sm rounded-lg`}>
           <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
               <Text style={tailwind`font-semibold text-[13px]`}>Subtotal</Text>
-              <Text style={tailwind`font-semibold text-[12px]`}>$84.50</Text>
+              <Text style={tailwind`font-semibold text-[12px]`}>$ {cartTotal}</Text>
           </View>
 
           <View style={tailwind`flex-row items-center justify-between py-3 border-t-[1px] border-b-[1px] border-gray-200 px-5`}>
               <Text style={tailwind`font-semibold text-[13px]`}>Delivery</Text>
-              <Text style={tailwind`font-semibold text-xs`}>Free</Text>
+              <Text style={tailwind`font-semibold text-xs`}>$ {delivery}</Text>
           </View>
 
           <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
               <Text style={tailwind`font-bold text-[16px]`}>Total</Text>
-              <Text style={tailwind`font-bold text-[14px] text-[#FA5758]`}>$84.50</Text>
+              <Text style={tailwind`font-bold text-[14px] text-[#FA5758]`}>$ {cartTotal + delivery}</Text>
           </View>
       </View>
 

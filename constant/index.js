@@ -81,7 +81,7 @@ export const foodsclass = [
                 description: 'soft and tender fried chicken',
                 food: [
                                  {
-                                                id: 1,
+                                                id: 5,
                                                 name: 'Hamburger',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
@@ -91,7 +91,7 @@ export const foodsclass = [
                                                 category: 'Snacks',
                                  },
                                  {
-                                                id: 2,
+                                                id: 6,
                                                 name: 'Shawama',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
@@ -101,7 +101,7 @@ export const foodsclass = [
                                                 category: 'Snacks',
                                  },
                                  {
-                                                id: 3,
+                                                id: 7,
                                                 name: 'Pizza',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
@@ -111,7 +111,7 @@ export const foodsclass = [
                                                 category: 'Snacks',
                                  },
                                  {
-                                                id: 4,
+                                                id: 8,
                                                 name: 'Fried Chicken',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
@@ -128,7 +128,7 @@ export const foodsclass = [
                 description: 'soft and tender fried chicken',
                 food: [
                                  {
-                                                id: 1,
+                                                id: 9,
                                                 name: 'Okro Soup',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
@@ -138,7 +138,7 @@ export const foodsclass = [
                                                 category: 'Soup',
                                  },
                                  {
-                                                id: 2,
+                                                id: 10,
                                                 name: 'Egusi Soup',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
@@ -148,7 +148,7 @@ export const foodsclass = [
                                                 category: 'Soup',
                                  },
                                  {
-                                                id: 3,
+                                                id: 11,
                                                 name: 'Vegitable Soup',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
@@ -158,7 +158,7 @@ export const foodsclass = [
                                                 category: 'Soup',
                                  },
                                  {
-                                                id: 4,
+                                                id: 12,
                                                 name: 'White Soup',
                                                 image: require('../assets/food/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese.jpg'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',

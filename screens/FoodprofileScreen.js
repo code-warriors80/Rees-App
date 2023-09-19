@@ -1,15 +1,27 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FIcon from 'react-native-vector-icons/Feather'
 import tailwind from 'twrnc'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather'
+import { useDispatch } from 'react-redux'
+import { setFood } from '../slice/foodSlice'
 
 export default function FoodprofileScreen() {
   const {params} = useRoute();
   const navigation = useNavigation()
   let item = params;
+
+  const dispatch = useDispatch()
+  
+  useEffect(()=> {
+    if(item && item.id)
+    {
+      dispatch(setFood({...item}))
+    }
+  }, [])
+
   return (
     <SafeAreaView style={tailwind`px-5 py-2 flex-1 bg-white`}>
         {/* HEADER START */}
