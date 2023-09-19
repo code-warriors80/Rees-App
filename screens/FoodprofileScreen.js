@@ -113,7 +113,7 @@ export default function FoodprofileScreen() {
           </View>
         </ScrollView>
 
-        <TouchableOpacity style={tailwind`bg-[#FA5758] py-4 rounded-lg`}>
+        <TouchableOpacity style={tailwind`bg-[#FA5758] py-4 rounded-lg`} onPress={(handleIncrease)}>
                 <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Add To Basket</Text>
         </TouchableOpacity>
     </SafeAreaView>

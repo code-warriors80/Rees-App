@@ -1,5 +1,8 @@
 # Rees-App
 
+Sanity Install
+npm create sanity@latest -- --template clean --create-project "Ree's App" --dataset production
+
 Screens Allocation
 
 Savage

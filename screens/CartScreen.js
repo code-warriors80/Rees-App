@@ -39,7 +39,7 @@ export default function CartScreen() {
               <FIcon name='arrow-left' size={20} color='black'/>
             </TouchableOpacity>
 
-            <Text style={tailwind`text-[16px] font-bold mx-auto`}>My Basket</Text>
+            <Text style={tailwind`text-[16px] font-bold mx-auto`}>My Cart</Text>
         </View>
 
         <ScrollView style={tailwind`flex-1`}>
