@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import {  View, Text , TouchableOpacity, ScrollView, Image } from 'react-native'
 import FIcon from 'react-native-vector-icons/Feather'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -14,8 +14,39 @@ export default function CheckoutScreen() {
               <FIcon name='arrow-left' size={20} color='black'/>
             </TouchableOpacity>
 
-            <Text style={tailwind`text-[16px] font-bold mx-auto`}>Checkout</Text>
-        </View>
+            {/* <Text style={tailwind`text-[16px] font-bold mx-auto`}>Checkout</Text> */}
+          </View>
+
+          <View>
+            <Text style={tailwind`text-[16px] font-bold mx-auto p-4`}>Select Payment option</Text>
+          </View>
+
+          <TouchableOpacity>
+             <View style={tailwind`bg-white rounded-lg shadow flex-row items-center p-4 m-3`}>
+                <Image source={require("../assets/logos/master.png")} style={tailwind`w-16 h-16`}/>
+                  <View style={tailwind`flex-1  ml-15`}>
+                    <Text style={tailwind`text-[4]`}>Pay with credit card</Text>
+                  </View>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <View style={tailwind`bg-white rounded-lg shadow flex-row items-center p-3 m-3`}>
+                <Image source={require("../assets/logos/ussd.png")} style={tailwind`w-16 h-16`}/>
+                  <View style={tailwind`flex-1  ml-15`}>
+                    <Text style={tailwind`text-[4]`}>Pay via USSD code</Text>
+                  </View>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <View style={tailwind`bg-white rounded-lg shadow flex-row items-center p-3 m-3`}>
+                <Image source={require("../assets/logos/bank.png")} style={tailwind`w-16 h-16`}/>
+                  <View style={tailwind`flex-1  ml-15`}>
+                    <Text style={tailwind`text-[4]`}>Local Bank-transfer</Text>
+                  </View>
+              </View>
+            </TouchableOpacity>
     </SafeAreaView>
   )
 }
