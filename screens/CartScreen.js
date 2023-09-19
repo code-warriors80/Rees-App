@@ -47,24 +47,27 @@ export default function CartScreen() {
           let dish = items[0]
           return(
               <View key={key} style={tailwind`bg-white rounded-lg shadow flex-row items-center p-2 m-2`}>
-                  <Image source={dish.image} style={tailwind`w-19 h-19`}/>
+                  <Image source={dish.image} style={tailwind`w-16 h-16`}/>
 
-                  <View style={tailwind`flex-1 mx-2`}>
+                  <View style={tailwind`flex-1 mr-5 ml-3`}>
                       <View style={tailwind`flex-row items-start justify-between mb-1`}>
                           <View style={tailwind``}>
-                            <Text style={tailwind`font-bold`}>{dish.name}</Text>
-                            <Text style={tailwind`text-xs text-gray-400`}>{dish.category}</Text>
+                            <Text style={tailwind`font-bold text-[14px] mb-1`}>{dish.name}</Text>
+                            <Text style={tailwind`text-[10px] text-gray-400`}>{dish.category}</Text>
                           </View>
-                          <Text style={tailwind`font-bold text-xs text-gray-700`}>${dish.price * items.length}</Text>
+                          <Text style={tailwind`font-bold text-xs text-gray-700`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {
+                            (dish.price * items.length).toLocaleString('en-US')
+                          
+                          }</Text>
                       </View>
 
                       <View style={tailwind`flex-row items-center justify-between`}>
-                        <Text style={tailwind`text-xs`}><Text style={tailwind`text-xs text-[#FA5758]`}>$ </Text>{dish.price}</Text>
-                          <View style={tailwind`flex-row items-center gap-3`}>
+                        <Text style={tailwind`text-xs`}><Text style={tailwind`text-xs text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> </Text>{dish.price.toLocaleString('en-US')}</Text>
+                          <View style={tailwind`flex-row items-center gap-2`}>
                             <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`} onPress={() => dispatch(removeFromCart({id: dish.id}))}>
                               <Icon name='minus' size={12} color='black'/>
                             </TouchableOpacity>
-                            <Text style={tailwind`font-bold text-sm`}>{items.length}</Text>
+                            <Text style={tailwind`font-bold text-xs`}>{items.length}</Text>
                             <TouchableOpacity style={tailwind`bg-gray-200 p-1 rounded-full shadow-sm`} onPress={() => dispatch(addToCart({...dish}))}>
                                 <Icon name='plus' size={12} color='black'/>
                             </TouchableOpacity>
@@ -88,21 +91,21 @@ export default function CartScreen() {
       <View style={tailwind`bg-white shadow-sm rounded-lg`}>
           <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
               <Text style={tailwind`font-semibold text-[13px]`}>Subtotal</Text>
-              <Text style={tailwind`font-semibold text-[12px]`}>$ {cartTotal}</Text>
+              <Text style={tailwind`font-semibold text-[12px]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {cartTotal.toLocaleString('en-US')}</Text>
           </View>
 
           <View style={tailwind`flex-row items-center justify-between py-3 border-t-[1px] border-b-[1px] border-gray-200 px-5`}>
               <Text style={tailwind`font-semibold text-[13px]`}>Delivery</Text>
-              <Text style={tailwind`font-semibold text-xs`}>$ {delivery}</Text>
+              <Text style={tailwind`font-semibold text-xs`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {delivery.toLocaleString('en-US')}</Text>
           </View>
 
           <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
               <Text style={tailwind`font-bold text-[16px]`}>Total</Text>
-              <Text style={tailwind`font-bold text-[14px] text-[#FA5758]`}>$ {cartTotal + delivery}</Text>
+              <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {(cartTotal + delivery).toLocaleString('en-US')}</Text>
           </View>
       </View>
 
-        <TouchableOpacity style={tailwind`bg-[#FA5758] py-4 rounded-lg mt-5`} onPress={() => navigation.navigate('Checkout')}>
+        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => navigation.navigate('Checkout')}>
           <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Confirm Order</Text>
         </TouchableOpacity>
     </SafeAreaView>

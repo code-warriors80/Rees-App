@@ -47,7 +47,7 @@ export default function FoodprofileScreen() {
         <ScrollView showsVerticalScrollIndicator={false} style={tailwind`flex-1`}>
           <View>
               <Text style={tailwind`text-center text-lg`}>{item.name}</Text>
-              <Text style={tailwind`text-center text-lg font-bold mt-2`}><Text style={tailwind`text-sm text-[#FA5758]`}>$ </Text>{item.price}</Text>
+              <Text style={tailwind`text-center text-sm font-bold my-2`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {item.price.toLocaleString('en-US')}</Text>
               <View style={tailwind`flex-1 items-center justify-center`}>
                 <Image source={item.image} style={tailwind`w-65 h-60`}/>
               </View>
@@ -55,16 +55,16 @@ export default function FoodprofileScreen() {
               <View>
                   <View style={tailwind`flex-row items-center justify-center gap-3 my-3 shadow-lg`}>
                       <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full shadow-sm`} onPress={(handleDecrease)}>
-                        <Icon name='minus' size={15} color='black'/>
+                        <Icon name='minus' size={13} color='black'/>
                       </TouchableOpacity>
 
-                      <Text style={tailwind`font-bold text-lg`}>{totalItems.length}</Text>
+                      <Text style={tailwind`font-bold text-xs`}>{totalItems.length}</Text>
 
                       <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full shadow-sm`} onPress={handleIncrease}>
-                          <Icon name='plus' size={15} color='black'/>
+                          <Icon name='plus' size={13} color='black'/>
                       </TouchableOpacity>
                   </View>
-                  <Text style={tailwind`font-light text-center text-gray-500`}>$ {item.price * totalItems.length}</Text>
+                  <Text style={tailwind`font-light text-center text-xs text-gray-500`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {(item.price * totalItems.length).toLocaleString('en-US')}</Text>
               </View>
 
               <View style={tailwind`flex-row items-center justify-between mt-7`}>
@@ -113,7 +113,7 @@ export default function FoodprofileScreen() {
           </View>
         </ScrollView>
 
-        <TouchableOpacity style={tailwind`bg-[#FA5758] py-4 rounded-lg`} onPress={(handleIncrease)}>
+        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg`} onPress={(handleIncrease)}>
                 <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Add To Basket</Text>
         </TouchableOpacity>
     </SafeAreaView>

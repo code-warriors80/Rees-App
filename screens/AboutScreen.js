@@ -49,7 +49,7 @@ export default function AboutScreen() {
                       <View key={index} style={tailwind`flex-row items-center justify-between py-3 border-b-[1px] border-gray-200`}>
                           <View style={tailwind` flex-row items-center gap-2`}>
                               <View style={tailwind`${social.bgcolor} p-2 rounded-full`}>
-                                  <FIcon name={social.name} size={15} color='white'/>
+                                  {social.name}
                               </View>
                               <Text style={tailwind`font-bold text-[13px]`}>{social.title}</Text>
                           </View>
@@ -63,7 +63,7 @@ export default function AboutScreen() {
                     <Text style={tailwind`text-xs text-gray-600 mt-3`}>{abt.description}</Text>
                     <View style={tailwind`flex-row items-center gap-2 my-2`}>
                       <Image source={require('../assets/icons/pin.png')} style={tailwind`w-5 h-5`}/>
-                      <Text style={tailwind`text-[#FA5758] text-xs`}>{abt.address}</Text>
+                      <Text style={tailwind`text-[#F39300] text-xs`}>{abt.address}</Text>
                     </View>
                 </View>
               </ScrollView>

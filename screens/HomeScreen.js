@@ -61,8 +61,8 @@ export default function HomeScreen() {
                               <Image source={require('../assets/h5-bg-countdown1.jpg')} style={tailwind` absolute w-full h-full`}/>
                               <View style={tailwind`my-auto py-4 px-7`}>
                                     <Text style={tailwind`text-white font-bold text-xs`}>Get Special Discount</Text>
-                                    <Text style={tailwind`text-[#FA5758] text-xl font-extrabold`}>Up to 30%</Text>
-                                    <TouchableOpacity style={tailwind`w-28 rounded-lg mt-2 py-3 flex items-center justify-center bg-[#FA5758]`}>
+                                    <Text style={tailwind`text-[#F39300] text-xl font-extrabold`}>Up to 30%</Text>
+                                    <TouchableOpacity style={tailwind`w-28 rounded-lg mt-2 py-3 flex items-center justify-center bg-[#F39300]`}>
                                           <Text style={tailwind`text-white font-bold`}>Explore Now</Text>
                                     </TouchableOpacity>
                               </View>
@@ -73,7 +73,7 @@ export default function HomeScreen() {
                   <View style={tailwind`p-5 flex-1`}>
                       <View style={tailwind`flex-row justify-between items-center`}>
                             <Text style={tailwind`font-bold`}>Food Items</Text>
-                            <Text style={tailwind`text-[#FA5758] font-light text-xs`}>View All</Text>
+                            <Text style={tailwind`text-[#F39300] font-light text-xs`}>View All</Text>
                       </View>
 
                         <Category />
@@ -88,7 +88,7 @@ export default function HomeScreen() {
                                                 <Text style={tailwind`font-light text-xs text-gray-600`}>{myclass.description}</Text>
                                           </View>
                                           <TouchableOpacity>
-                                                <Text style={tailwind`text-[#FA5758] font-light text-xs`}>View All</Text>
+                                                <Text style={tailwind`text-[#F39300] font-light text-xs`}>View All</Text>
                                           </TouchableOpacity>
                                     </View>
 

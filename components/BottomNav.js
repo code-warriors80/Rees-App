@@ -12,7 +12,7 @@ export default function BottomNav() {
      const cartItem = useSelector(selectCartItem)
      if(!cartItem.length);
   return (
-    <View style={tailwind`bg-[#FA5758] absolute w-full flex-row items-center justify-around bottom-0 z-50 rounded-tl-20 rounded-tr-20 py-2`}>
+    <View style={tailwind`bg-[#F39300] absolute w-full flex-row items-center justify-around bottom-0 z-50 rounded-tl-20 rounded-tr-20 py-2`}>
                <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-full`} onPress={() => navigation.navigate('Home')}>
                     <Image source={require('../assets/icons/home.png')} style={tailwind`w-7 h-7`}/>
                </TouchableOpacity>
