@@ -2,12 +2,12 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React, {useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FIcon from 'react-native-vector-icons/Feather'
+import Icon from 'react-native-vector-icons/Feather'
 import tailwind from 'twrnc'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFood } from '../slice/foodSlice'
-import { removeFromCart, selectCartItemById, addToCart } from '../slice/cartSlice'
+import { removeFromCart, selectCartItemById ,addToCart } from '../slice/cartSlice'
 
 export default function FoodprofileScreen() {
   const {params} = useRoute();
