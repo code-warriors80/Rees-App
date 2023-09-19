@@ -6,7 +6,7 @@ import tailwind from 'twrnc'
 import Icon from 'react-native-vector-icons/Feather'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart, selectCartItem,  selectCartTotal } from '../slice/cartSlice'
+import { addToCart, removeFromCart, selectCartItem, selectCartTotal } from '../slice/cartSlice'
 
 
 export default function CartScreen() {
