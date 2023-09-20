@@ -184,7 +184,7 @@ export const foodsclass = [
                                  {
                                                 id: 13,
                                                 name: 'Egusi Soup (Per Ltr)',
-                                                image: require('../assets/food/burger.png'),
+                                                image: require('../assets/food/egusi.png'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
                                                 price: 5000,
                                                 stars: 5,
@@ -204,7 +204,7 @@ export const foodsclass = [
                                  {
                                                 id: 15,
                                                 name: 'Ogbono Soup (Per Ltr)',
-                                                image: require('../assets/food/burger.png'),
+                                                image: require('../assets/food/okro.png'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
                                                 price: 5000,
                                                 stars: 1,
