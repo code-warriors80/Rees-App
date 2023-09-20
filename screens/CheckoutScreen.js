@@ -4,10 +4,15 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native';
 import tailwind from 'twrnc';
+import { useDispatch, useSelector } from 'react-redux';
 import { Image } from 'react-native';
+import { selectCartItem, selectCartTotal } from '../slice/cartSlice';
 
 export default function CheckoutScreen() {
   const navigation = useNavigation()
+  const cartItems = useSelector(selectCartItem)
+  const cartTotal = useSelector(selectCartTotal)
+  const delivery = 300
   return (
     <SafeAreaView style={tailwind`px-7 py-3 flex-1 bg-white`}>
         <View style={tailwind`flex-row items-center justify-between pt-3 pb-5`}>
@@ -75,12 +80,12 @@ export default function CheckoutScreen() {
         <View style={tailwind`bg-white shadow-sm rounded-lg`}>
           <View style={tailwind`flex-row items-center justify-between py-3 border-t-[1px] border-b-[1px] border-gray-200 px-5`}>
               <Text style={tailwind`font-semibold text-[12px]`}>Delivery</Text>
-              <Text style={tailwind`font-semibold text-xs`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>50</Text>
+              <Text style={tailwind`font-semibold text-xs`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{delivery.toLocaleString('en-US')}</Text>
           </View>
 
           <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
               <Text style={tailwind`font-bold text-[16px]`}>Total</Text>
-              <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>100</Text>
+              <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{(delivery + cartTotal).toLocaleString('en-US')}</Text>
           </View>
       </View>
 
