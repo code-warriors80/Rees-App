@@ -25,7 +25,7 @@ export default function Navigation() {
                                              <Stack.Screen name="Cart" component={CartScreen} options={{presentation: 'card'}}/>
                                              <Stack.Screen name="Checkout" component={CheckoutScreen} options={{presentation: 'modal'}}/>
                                              <Stack.Screen name="About" component={AboutScreen} options={{presentation: 'card'}}/>
-                                             <Stack.Screen name="Location" component={LocationScreen} options={{presentation: 'card'}}/>
+                                             <Stack.Screen name="Location" component={LocationScreen} options={{presentation: 'modal'}}/>
                               </Stack.Navigator>
                </NavigationContainer>
   )

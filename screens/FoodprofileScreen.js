@@ -49,7 +49,7 @@ export default function FoodprofileScreen() {
               <Text style={tailwind`text-center text-lg`}>{item.name}</Text>
               <Text style={tailwind`text-center text-sm font-bold my-2`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {item.price.toLocaleString('en-US')}</Text>
               <View style={tailwind`flex-1 items-center justify-center`}>
-                <Image source={item.image} style={tailwind`w-65 h-60`}/>
+                <Image source={item.image} style={tailwind`w-50 h-50`}/>
               </View>
 
               <View>

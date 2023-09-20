@@ -21,7 +21,7 @@ export default function CheckoutScreen() {
         <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
             <View>
                   <Text style={tailwind`font-bold mb-4`}>Shipping Address</Text>
-                  <TouchableOpacity style={tailwind`flex-row items-center justify-between w-full bg-[#F39300] rounded-lg p-3 shadow-lg`}>
+                  <TouchableOpacity style={tailwind`flex-row items-center justify-between w-full bg-[#F39300] rounded-lg p-3 shadow-lg`} onPress={() => navigation.navigate('Location')}>
                     <View style={tailwind`flex-row items-center gap-3`}>
                       <Image source={require('../assets/3d-view-map.jpg')} style={tailwind`w-15 h-15 rounded-lg`}/>
                       <View style={tailwind`w-[68%]`}>

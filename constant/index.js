@@ -107,7 +107,7 @@ export const foodsclass = [
                                  {
                                                 id: 7,
                                                 name: 'Fried Rice/ Chicken',
-                                                image: require('../assets/food/burger.png'),
+                                                image: require('../assets/food/rice.png'),
                                                 description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio facere corrupti illum repellat numquam et ullam natus qui ipsum odio.',
                                                 price: 2500,
                                                 stars: 3,
