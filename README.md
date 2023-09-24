@@ -3,6 +3,9 @@
 Sanity Install
 npm create sanity@latest -- --template clean --create-project "Ree's App" --dataset production
 
+async storage install
+npm install @react-native-async-storage/async-storage
+
 Screens Allocation
 
 Savage

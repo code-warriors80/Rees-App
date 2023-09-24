@@ -12,6 +12,8 @@ import CheckoutScreen from './screens/CheckoutScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import AboutScreen from './screens/AboutScreen';
 import LocationScreen from './screens/LocationScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import LoginScreen from './screens/LoginScreen';
 
 export default function Navigation() {
   return (
@@ -19,6 +21,8 @@ export default function Navigation() {
                               <Stack.Navigator screenOptions={{
                                              headerShown: false
                               }}>
+                                            <Stack.Screen name="Register" component={RegisterScreen} />
+                                            <Stack.Screen name="Login" component={LoginScreen} />
                                              <Stack.Screen name="Welcome" component={WelcomeScreen} />
                                              <Stack.Screen name="Home" component={HomeScreen} options={{presentation: 'card'}}/>
                                              <Stack.Screen name="FoodProfile" component={FoodprofileScreen} options={{presentation: 'card'}} />

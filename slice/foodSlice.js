@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { foodsclass } from '../constant'
 
 const initialState = {
-  food: null,
+  food: [],
 }
 
 export const foodSlice = createSlice({
@@ -10,7 +10,7 @@ export const foodSlice = createSlice({
   initialState,
   reducers: {
     setFood: (state, action) => {
-      state.food = action.payload;
+      state.food = foodsclass;
     }
   },
 })

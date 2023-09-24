@@ -1,6 +1,10 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, {useState} from 'react'
+
+// DATA
 import { categories } from '../constant'
+
+// TAILWIND
 import tailwind from 'twrnc'
 
 export default function Category() {
@@ -19,7 +23,7 @@ export default function Category() {
                     <Text style={tailwind`text-gray-600 text-xs text-center font-light ${textClass}`}>{items.name}</Text>
                 </TouchableOpacity>
               )
-})}
+      })}
     </ScrollView>
   )
 }

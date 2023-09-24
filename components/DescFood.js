@@ -1,7 +1,13 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+
+// TAILWIND
 import tailwind from 'twrnc'
+
+// NAVIGATION
 import { useNavigation } from '@react-navigation/native';
+
+// REDUX
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../slice/cartSlice';
 
@@ -32,6 +38,7 @@ export default function DescFood({food}) {
                                           <Image source={require('../assets/icons/star.png')} style={tailwind`w-3 h-3`}/>
                                           <Image source={require('../assets/icons/star.png')} style={tailwind`w-3 h-3`}/>
                                     </View>
+                                    
                                     <TouchableOpacity onPress={() => navigation.navigate('FoodProfile', {...food})} style={tailwind`flex-1 items-center`}>
                                           <Text style={tailwind`font-bold text-center text-[14px]`} numberOfLines={1} ellipsizeMode="tail">{food.name}</Text>
                                     </TouchableOpacity>

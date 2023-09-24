@@ -1,18 +1,26 @@
 import { View, Text, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
+
+// Components
 import BottomNav from '../components/BottomNav'
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { foodsclass } from '../constant'
 import Category from '../components/category'
 import DescFood from '../components/DescFood'
 
-export default function HomeScreen() {
-      const {params} = useRoute();
-      const navigation = useNavigation()
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setFood, selectFood } from '../slice/foodSlice';
 
-      let item = params;
+export default function HomeScreen() {
+      const dispatch = useDispatch();
+
+      const foodCategories = useSelector(selectFood);
+
+      useEffect(() => {
+            dispatch(setFood());
+      }, [dispatch]);
+      
   return (
     <SafeAreaView style={tailwind`flex-1 bg-white`}>
             <View>
@@ -35,13 +43,13 @@ export default function HomeScreen() {
                   {/* SEARCH BAR START */}
                   <View style={tailwind`p-2 px-4 flex-row items-center justify-between`}>
                         <View style={tailwind`flex-1 border border-2 border-gray-200 flex-row items-center gap-3 p-2 rounded-lg`}>
-                                    <Image source={require('../assets/icons/search.png')} style={tailwind`w-5 h-5`}/>
-                                    <TextInput placeholder='Search Food & Snacks' style={tailwind`flex-1 text-xs text-gray-600`} />
-                                    <Image source={require('../assets/icons/mic.png')} style={tailwind`w-5 h-5`}/>
+                              <Image source={require('../assets/icons/search.png')} style={tailwind`w-5 h-5`}/>
+                              <TextInput placeholder='Search Food & Snacks' style={tailwind`flex-1 text-xs text-gray-600`}/>
+                              <Image source={require('../assets/icons/mic.png')} style={tailwind`w-5 h-5`}/>
                         </View>
 
                         <View style={tailwind`bg-gray-200 p-2 rounded-lg ml-3`}>
-                                    <Image source={require('../assets/icons/slider.png')} style={tailwind`w-7 h-7`}/>
+                              <Image source={require('../assets/icons/slider.png')} style={tailwind`w-7 h-7`}/>
                         </View>
                   </View>
                   {/* SEARCH BAR END */}
@@ -67,6 +75,7 @@ export default function HomeScreen() {
                   </View>
                   {/* ADVERT END */}
 
+                  {/* CATEGORY START */}
                   <View style={tailwind`p-5 flex-1`}>
                       <View style={tailwind`flex-row justify-between items-center`}>
                             <Text style={tailwind`font-bold`}>Food Items</Text>
@@ -75,9 +84,11 @@ export default function HomeScreen() {
 
                         <Category />
                   </View>
+                  {/* CATEGORY END */}
+
 
                   <View style={tailwind`flex-1`}>
-                        {foodsclass.map((myclass, index) => (
+                        {foodCategories.map((myclass, index) => (
                               <View key={index} style={tailwind`mb-5`}>                                    
                                     <View style={tailwind`w-[90%] mx-auto flex-row justify-between items-start mb-1`}>
                                           <View>
@@ -89,14 +100,14 @@ export default function HomeScreen() {
                                           </TouchableOpacity>
                                     </View>
 
+                                    {/* FOODLIST DISPLAY */}
                                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tailwind`w-[90%] mx-auto mr-5`}>
                                           {myclass.food.map((foods, index) => (
-                                                
                                                 <DescFood food={foods} key={index}/>
                                                 
                                           ))}
                                     </ScrollView>
-                                    
+                                    {/* FOODLIST DISPLAY */}
                               </View>
                         ))}
 

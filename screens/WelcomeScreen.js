@@ -1,6 +1,10 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
+
+// TAILWIND
 import tailwind from 'twrnc'
+
+// NAVIGATION
 import { useNavigation } from '@react-navigation/native';
 
 export default function WelcomeScreen() {

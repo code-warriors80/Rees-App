@@ -1,21 +1,32 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
-import React, {useEffect} from 'react'
+import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
+// ICONS
 import FIcon from 'react-native-vector-icons/Feather'
 import Icon from 'react-native-vector-icons/Feather'
+
+// TAILWIND
 import tailwind from 'twrnc'
+
+// NAVIGATION
 import { useNavigation, useRoute } from '@react-navigation/native';
+
+
+// REDUX
 import { useDispatch, useSelector } from 'react-redux'
-import { setFood } from '../slice/foodSlice'
-import { removeFromCart, selectCartItemById ,addToCart } from '../slice/cartSlice'
+import { removeFromCart, selectCartItemById, addToCart } from '../slice/cartSlice'
 
 export default function FoodprofileScreen() {
   const {params} = useRoute();
   const navigation = useNavigation()
-  let item = params;
-  const totalItems = useSelector(state => selectCartItemById(state, item.id))
 
   const dispatch = useDispatch()
+
+  let item = params;
+
+  const totalItems = useSelector(state => selectCartItemById(state, item.id))
+
 
   const handleIncrease = () => {
           dispatch(addToCart({...item}))
@@ -23,20 +34,13 @@ export default function FoodprofileScreen() {
 
   const handleDecrease = () => {
     dispatch(removeFromCart({id: item.id}))
-}
-  
-  useEffect(()=> {
-    if(item && item.id)
-    {
-      dispatch(setFood({...item}))
-    }
-  }, [])
+  }
 
   return (
     <SafeAreaView style={tailwind`px-5 py-2 flex-1 bg-white`}>
         {/* HEADER START */}
         <View style={tailwind`flex-row items-center justify-between py-2`}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`bg-gray-200 p-2 rounded-full shadow-sm`}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
               <FIcon name='arrow-left' size={20} color='black'/>
             </TouchableOpacity>
             
@@ -88,26 +92,6 @@ export default function FoodprofileScreen() {
                 <Text style={tailwind`font-bold text-lg mb-2`}>Details</Text>
                 <Text style={tailwind`font-light text-gray-500 text-xs`}>{item.description}</Text>
                 <Text style={tailwind`font-bold text-xs mt-2`}>({item.reviews} Reviews) <Text>{item.category}</Text></Text>
-              </View>
-
-              <View>
-                <Text style={tailwind`font-bold text-lg mb-2`}>Ingredients</Text>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>2 cups converted rice (13 1/4 ounces; 375g), such as Uncle Ben's Original or golden sella basmati</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>3 1/2 cups (825ml) Nigerian-style stock, divided, plus more as needed</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>2 tablespoons (30ml) virgin coconut oil or vegetable oil</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1 medium carrot (2 3/4 ounces; 75g), cut into 1/4-inch dice</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1 small red or white onion (2 1/4 ounces; 60g), cut into 1/4-inch dice</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1 1/2 ounces (45g) green beans, stem ends trimmed and cut into 1/4-inch-thick rounds</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>Kosher salt</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>2 scallions, ends trimmed, white and green parts separated, and each thinly sliced crosswise, divided</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1/2 large red bell pepper (2 3/4 ounces; 75g), stemmed, seeded, and cut into 1/4-inch dice</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1/2 medium green bell pepper (2 1/4 ounces; 60g), stemmed, seeded, cut into 1/4-inch dice, divided</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1/4 cup (60g) drained canned whole kernel sweet corn</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>2 teaspoons Nigerian-style curry powder (see note)</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1 teaspoon dried thyme</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1/4 teaspoon freshly ground black pepper, plus more to taste</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>2 dried bay leaves</Text></View>
-                <View style={tailwind`flex-row items-center gap-3 mb-5`}><FIcon name='arrow-right' size={10} color='#FA5758'/><Text style={tailwind`text-xs pl-2`}>1/2 cup (120ml) full-fat coconut milk</Text></View>
               </View>
 
           </View>
