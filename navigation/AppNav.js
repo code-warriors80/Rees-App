@@ -21,9 +21,7 @@ export default function AppNav() {
     }
   return (
     <Provider store={store}>
-        {/* <Navigation /> */}
         {userToken !== null ? <AppStack /> : <AuthStack />}
-        {/* <AppStack /> */}
     </Provider>
   )
 }

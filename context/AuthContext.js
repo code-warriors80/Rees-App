@@ -9,11 +9,36 @@ export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [userToken, setUserToken] = useState(null)
     const [autherror, setAuthError] = useState('')
-    
-    let emailval = 'muctarmohammed07@gmail.com'
-    let passwordval = 'Incorrect1'
+
+    const register = (username, email, mobile, password) => {
+        console.log(username, email, mobile, password);
+    }
+
+    // const YourOTPComponent = (mobile) => {
+    //     const [otp, setOtp] = useState('');
+      
+    //     const handleSendOTP = async () => {
+    //       try {
+    //         // Call your server to send OTP
+    //         const response = await axios.post('http://your-server-url/send-otp', {
+    //           mobile,
+    //         });
+    //         Alert.alert('OTP Sent!', 'Check your phone for the OTP.');
+    //       } catch (error) {
+    //         console.error('Error sending OTP:', error);
+    //       }
+    //     };
+    // }
+
+    // const handleVerifyOTP = () => {
+    //     // Implement OTP verification logic here
+    //     // Compare otp with the user-entered OTP and take appropriate action
+    // };
 
     const login = (email, password) => {
+        setIsLoading(true)
+        let emailval = 'muctarmohammed07@gmail.com'
+        let passwordval = 'Incorrect1$'
 
         // axios.post(`${BASE_URL}`, {
         //     email, password
@@ -23,7 +48,7 @@ export const AuthProvider = ({children}) => {
         //     console.log(`login error ${e}`);
         // })
 
-        if(email == emailval && password == passwordval)
+        if(email === emailval && password === passwordval)
         {
             setUserToken('ioiojlkad');
             setIsLoading(false)
@@ -33,11 +58,13 @@ export const AuthProvider = ({children}) => {
         {
             return setAuthError('incorrect email or password');
         }
+
+        setTimeout(() => {
+            setAuthError('')
+        }, 5000)
     }
 
-    setTimeout(() => {
-        setAuthError('')
-    }, 5000)
+
 
     const logout = () => {
         setUserToken(null)
@@ -56,7 +83,6 @@ export const AuthProvider = ({children}) => {
             setUserToken(userToken)
             setIsLoading(false)
         }
-
     }
 
     useEffect(() => {
@@ -64,7 +90,7 @@ export const AuthProvider = ({children}) => {
     }, [])
 
     return(
-        <AuthContext.Provider value={{login, logout, autherror, isLoading, userToken}}>
+        <AuthContext.Provider value={{login, logout, register ,autherror, isLoading, userToken}}>
             {children}
         </AuthContext.Provider>
     )

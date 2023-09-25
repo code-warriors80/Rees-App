@@ -1,8 +1,7 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, {useState, useContext} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
-import { TextInput } from 'react-native-gesture-handler'
 import FIcon from 'react-native-vector-icons/Feather'
 import { useNavigation } from '@react-navigation/native'
 import { AuthContext } from '../context/AuthContext'
@@ -145,7 +144,7 @@ export default function LoginScreen() {
                     </TouchableOpacity>
 
                     {email == '' || password == '' || checkValidEmail == true || checkValidPassword == true ? (
-                        <TouchableOpacity disabled style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`} onPress={() => login(email, password)}>
+                        <TouchableOpacity disabled style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}>
                             <Text style={tailwind`text-center text-white font-bold`}>Login</Text>
                         </TouchableOpacity>
                     ): (
