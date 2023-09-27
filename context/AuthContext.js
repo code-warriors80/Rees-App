@@ -1,8 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BASE_URL } from "../constant/config";
-import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -11,49 +10,44 @@ export const AuthProvider = ({children}) => {
     const [userToken, setUserToken] = useState(null)
     const [autherror, setAuthError] = useState('')
     const [userInfo, setUserInfo] = useState(null);
-
-    const navigation = useNavigation()
     
 
     // This is your register script
     const register = async (username, email, mobile, password) => {
-        console.log(username, email, mobile, password);
             try {
                await axios.post(`${BASE_URL}/register`, {
-                username: username,
-                email: email,
-                mobile: mobile,
-                password: password,
+                username,
+                email,
+                mobile,
+                address: 'samaru',
+                password,
               });
-              navigation.navigate('Login')
             } catch (error) {
               console.error('Registration failed:', error.response ? error.response.data : error.message);
             }
-        
     }
 
 
     // This is your login script
     const login = async (email, password) => {
-        setIsLoading(true)
+        if(email == 'test@gmail.com' && password == 'Incorrect1$')
+        {
+            setUserToken('user3465vcf')
+            AsyncStorage.setItem('UserToken: ', 'user3465vcf')
+        }
+            // await axios.post(`${BASE_URL}/login`, {
+            //   email,
+            //   password
+            // }).then((res) => {
+            //     let userInfo = res.data.token
+            //     setUserInfo(userInfo)
+            //     setUserToken(userInfo.data.token)
 
-        try {
-             await axios.post(`${BASE_URL}/login`, {
-              email: email,
-              password: password,
-            }).then((res) => {
-                let userInfo = res.data.token
-                setUserInfo(userInfo)
-                setUserToken(userInfo.data.token)
-
-                AsyncStorage.setItem('UserInfo: ', JSON.stringify(userInfo))
-                AsyncStorage.setItem('UserToken: ', userInfo.data.token)
-            }).catch((error) => {
-                setAuthError('Login failed:', error.response ? error.response.data : error.message)
-            });
-          } catch (error) {
-            console.error('Login failed:', error.response ? error.response.data : error.message);
-          }
+            //     AsyncStorage.setItem('UserInfo: ', JSON.stringify(userInfo))
+            //     AsyncStorage.setItem('UserToken: ', userInfo.data.token)
+            // }).catch((error) => {
+            //     setAuthError('Login failed:', error.response ? error.response.data : error.message)
+            // });
 
             setTimeout(() => {
                     setAuthError('')

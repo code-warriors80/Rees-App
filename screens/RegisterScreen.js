@@ -86,6 +86,7 @@ export default function RegisterScreen() {
         }
     };
 
+
     const handelCheckPassword = (text) => {
         setPassword(text)
         if(text == '')
@@ -179,6 +180,18 @@ export default function RegisterScreen() {
                             <TextInput placeholder='Mobile' style={tailwind`text-xs flex-1`} keyboardType='numeric' value={mobile} onChangeText={(text) => handelCheckMobile(text)}/>
                         </View>
                     )}
+
+                    {/* {checkValidAddress ? (
+                        <View style={tailwind`w-[90%] p-3 px-5 bg-white border border-red-500 mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
+                            <FIcon name='map-pin' size={15} color='red'/>
+                            <TextInput placeholder='Address' style={tailwind`text-xs flex-1 text-red-500`} value={address} onChangeText={(text) => handelCheckAddress(text)}/>
+                        </View>
+                    ) : (
+                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
+                            <FIcon name='map-pin' size={15} color='gray'/>
+                            <TextInput placeholder='Address' style={tailwind`text-xs flex-1`} value={address} onChangeText={(text) => handelCheckAddress(text)}/>
+                        </View>
+                    )} */}
 
                     {checkValidPassword ? (
                         <View style={tailwind`w-[90%] p-3 px-5 bg-white border border-red-500 mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>

@@ -156,61 +156,15 @@ export default function LoginScreen() {
               </Text>
             </TouchableOpacity>
 
-            {email == "" ||
-            password == "" ||
-            checkValidEmail == true ||
-            checkValidPassword == true ? (
-              <TouchableOpacity
-                disabled
-                style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}
-                onPress={() => login(email, password)}
-              >
-                <Text style={tailwind`text-center text-white font-bold`}>
-                  Login
-                </Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}
-                onPress={() => login(email, password)}
-              >
-                <Text style={tailwind`text-center text-white font-bold`}>
-                  Login
-                </Text>
-              </TouchableOpacity>
-            )}
-            <Text style={tailwind`text-center text-xs mt-2 text-red-500`}>
-              {autherror}
-            </Text>
-
-            <View>
-              <View
-                style={tailwind`flex-row items-center justify-center gap-1 mt-4`}
-              >
-                <Text style={tailwind`text-center text-gray-500 text-xs`}>
-                  New To Our App
-                </Text>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Register")}
-                >
-                  <Text style={tailwind`text-xs text-[#F39300]`}>Register</Text>
-                </TouchableOpacity>
-              </View>
-
-
-                    <TouchableOpacity style={tailwind`my-2`}>
-                        <Text style={tailwind`text-right text-gray-500 text-xs mr-8`}>Forgot your password?</Text>
-                    </TouchableOpacity>
-
-                    {email == '' || password == '' || checkValidEmail == true || checkValidPassword == true ? (
+            {email == '' || password == '' || checkValidEmail == true || checkValidPassword == true ? (
                         <TouchableOpacity disabled style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}>
                             <Text style={tailwind`text-center text-white font-bold`}>Login</Text>
                         </TouchableOpacity>
-                    ): (
+            ): (
                         <TouchableOpacity style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`} onPress={() => login(email, password)}>
                             <Text style={tailwind`text-center text-white font-bold`}>Login</Text>
                         </TouchableOpacity>
-                    )}
+            )}
                     <Text style={tailwind`text-center text-xs mt-2 text-red-500`}>{autherror}</Text>
 
                     <View>
@@ -237,7 +191,6 @@ export default function LoginScreen() {
                 </View>  
             </View>
           </View>
-        </View>
     </SafeAreaView>
   );
 }
