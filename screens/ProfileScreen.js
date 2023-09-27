@@ -29,8 +29,7 @@ const ListItem = ({ title, text, children }) => {
 const ListLinkItem = ({ title, icon }) => {
   return (
     <TouchableOpacity
-      style={tailwind`flex flex-row items-center justify-between py-2`}
-    >
+      style={tailwind`flex flex-row items-center justify-between py-2`} >
       <Text style={tailwind`text-base font-semibold`}>{title}</Text>
 
       <FIcon name={icon || "chevrons-right"} size={20} color="black" />
@@ -38,7 +37,7 @@ const ListLinkItem = ({ title, icon }) => {
   );
 };
 
-export default function ProfileScreen({ navigation }) {
+export default function ProfileScreen() {
   return (
     <SafeAreaView style={tailwind`flex-1 bg-white p-5`}>
       {/* HEADER START */}
