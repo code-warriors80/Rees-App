@@ -2,6 +2,7 @@ import React, {createContext, useState, useEffect} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { BASE_URL } from "../constant/config";
+import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext()
 
@@ -9,79 +10,84 @@ export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [userToken, setUserToken] = useState(null)
     const [autherror, setAuthError] = useState('')
+    const [userInfo, setUserInfo] = useState(null);
 
-    const register = (username, email, mobile, password) => {
+    const navigation = useNavigation()
+    
+
+    // This is your register script
+    const register = async (username, email, mobile, password) => {
         console.log(username, email, mobile, password);
+            try {
+               await axios.post(`${BASE_URL}/register`, {
+                username: username,
+                email: email,
+                mobile: mobile,
+                password: password,
+              });
+              navigation.navigate('Login')
+            } catch (error) {
+              console.error('Registration failed:', error.response ? error.response.data : error.message);
+            }
+        
     }
 
-    // const YourOTPComponent = (mobile) => {
-    //     const [otp, setOtp] = useState('');
-      
-    //     const handleSendOTP = async () => {
-    //       try {
-    //         // Call your server to send OTP
-    //         const response = await axios.post('http://your-server-url/send-otp', {
-    //           mobile,
-    //         });
-    //         Alert.alert('OTP Sent!', 'Check your phone for the OTP.');
-    //       } catch (error) {
-    //         console.error('Error sending OTP:', error);
-    //       }
-    //     };
-    // }
 
-    // const handleVerifyOTP = () => {
-    //     // Implement OTP verification logic here
-    //     // Compare otp with the user-entered OTP and take appropriate action
-    // };
-
-    const login = (email, password) => {
+    // This is your login script
+    const login = async (email, password) => {
         setIsLoading(true)
-        let emailval = 'muctarmohammed07@gmail.com'
-        let passwordval = 'Incorrect1$'
 
-        // axios.post(`${BASE_URL}`, {
-        //     email, password
-        // }).then(res => {
-        //     console.log(res.data);
-        // }).catch(e => {
-        //     console.log(`login error ${e}`);
-        // })
+        try {
+             await axios.post(`${BASE_URL}/login`, {
+              email: email,
+              password: password,
+            }).then((res) => {
+                let userInfo = res.data.token
+                setUserInfo(userInfo)
+                setUserToken(userInfo.data.token)
 
-        if(email === emailval && password === passwordval)
-        {
-            setUserToken('ioiojlkad');
-            setIsLoading(false)
-            AsyncStorage.setItem('userToken', 'ioiojlkad')
-        }
-        else
-        {
-            return setAuthError('incorrect email or password');
-        }
+                AsyncStorage.setItem('UserInfo: ', JSON.stringify(userInfo))
+                AsyncStorage.setItem('UserToken: ', userInfo.data.token)
+            }).catch((error) => {
+                setAuthError('Login failed:', error.response ? error.response.data : error.message)
+            });
+          } catch (error) {
+            console.error('Login failed:', error.response ? error.response.data : error.message);
+          }
 
-        setTimeout(() => {
-            setAuthError('')
-        }, 5000)
+            setTimeout(() => {
+                    setAuthError('')
+            }, 5000)
     }
 
 
-
+    // This is your logout script
     const logout = () => {
         setUserToken(null)
         setIsLoading(false)
-        AsyncStorage.removeItem('userToken')
+        AsyncStorage.removeItem('UserInfo')
+        AsyncStorage.removeItem('UserToken')
     }
+
 
     const isLoggedIn = async () => {
         try {
-            let userToken = await AsyncStorage.getItem('userItem')
+            setIsLoading(true)
+            let userInfo = await AsyncStorage.getItem('UserInfo')
+            let userToken = await AsyncStorage.getItem('UserToken')
+            userInfo = JSON.stringify(userInfo)
+
+            if(userInfo)
+            {
+                setUserInfo(userInfo)
+                setUserToken(userToken)
+            }
+            setIsLoading(false)
         }
         catch(e)
         {
-            setIsLoading(true)
-            console.log(`isLogged in error ${e}`);
-            setUserToken(userToken)
-            setIsLoading(false)
+            console.log(`${e}`);
+            
         }
     }
 
@@ -90,7 +96,7 @@ export const AuthProvider = ({children}) => {
     }, [])
 
     return(
-        <AuthContext.Provider value={{login, logout, register ,autherror, isLoading, userToken}}>
+        <AuthContext.Provider value={{login, logout, register, userInfo, autherror, isLoading, userToken}}>
             {children}
         </AuthContext.Provider>
     )
