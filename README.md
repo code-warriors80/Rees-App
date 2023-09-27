@@ -6,6 +6,10 @@ npm create sanity@latest -- --template clean --create-project "Ree's App" --data
 async storage install
 npm install @react-native-async-storage/async-storage
 
+
+MongoDB Connection string
+'mongodb+srv://codewarriors02:incorrect@rees-app.mdtcwt2.mongodb.net/'
+
 Screens Allocation
 
 Savage

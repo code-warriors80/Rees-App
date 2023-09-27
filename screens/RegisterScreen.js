@@ -1,12 +1,13 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React, {useState} from 'react'
+import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import React, {useContext, useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
-import { TextInput } from 'react-native-gesture-handler'
 import FIcon from 'react-native-vector-icons/Feather'
 import { useNavigation } from '@react-navigation/native'
+import { AuthContext } from '../context/AuthContext'
 
 export default function RegisterScreen() {
+    const {register} = useContext(AuthContext)
     const navigation = useNavigation()
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -126,10 +127,6 @@ export default function RegisterScreen() {
         }
     };
 
-    const handelRegister = () => {
-        
-    }
-
     const seePassword = () => {
      if(passwordSecure == true){
          setPasswordSecure(false)
@@ -212,7 +209,7 @@ export default function RegisterScreen() {
                             <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
                         </TouchableOpacity>
                     ) : (
-                        <TouchableOpacity style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`} onPress={handelRegister}>
+                        <TouchableOpacity style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`} onPress={() => register(username, email, mobile, password)}>
                             <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
                         </TouchableOpacity>
                     )}

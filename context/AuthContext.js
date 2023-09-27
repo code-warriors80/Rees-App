@@ -2,66 +2,103 @@ import React, { createContext, useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BASE_URL } from "../constant/config";
-import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [userToken, setUserToken] = useState(null);
-  const [autherror, setAuthError] = useState("");
+export const AuthProvider = ({children}) => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [userToken, setUserToken] = useState(null)
+    const [autherror, setAuthError] = useState('')
+    const [userInfo, setUserInfo] = useState(null);
 
-  let emailval = "test@gmail.com";
-  let passwordval = "Incorrect1$";
+    const navigation = useNavigation()
+    
 
-  const login = (email, password) => {
-    // axios.post(`${BASE_URL}`, {
-    //     email, password
-    // }).then(res => {
-    //     console.log(res.data);
-    // }).catch(e => {
-    //     console.log(`login error ${e}`);
-    // })
-
-    if (email == emailval && password == passwordval) {
-      setUserToken("ioiojlkad");
-      setIsLoading(false);
-      AsyncStorage.setItem("userToken", "ioiojlkad");
-    } else {
-      return setAuthError("incorrect email or password");
+    // This is your register script
+    const register = async (username, email, mobile, password) => {
+        console.log(username, email, mobile, password);
+            try {
+               await axios.post(`${BASE_URL}/register`, {
+                username: username,
+                email: email,
+                mobile: mobile,
+                password: password,
+              });
+              navigation.navigate('Login')
+            } catch (error) {
+              console.error('Registration failed:', error.response ? error.response.data : error.message);
+            }
+        
     }
-  };
 
-  setTimeout(() => {
-    setAuthError("");
-  }, 5000);
 
-  const logout = () => {
-    setUserToken(null);
-    setIsLoading(false);
-    AsyncStorage.removeItem("userToken");
-  };
+    // This is your login script
+    const login = async (email, password) => {
+        setIsLoading(true)
 
-  const isLoggedIn = async () => {
-    try {
-      let userToken = await AsyncStorage.getItem("userItem");
-    } catch (e) {
-      setIsLoading(true);
-      console.log(`isLogged in error ${e}`);
-      setUserToken(userToken);
-      setIsLoading(false);
+        try {
+             await axios.post(`${BASE_URL}/login`, {
+              email: email,
+              password: password,
+            }).then((res) => {
+                let userInfo = res.data.token
+                setUserInfo(userInfo)
+                setUserToken(userInfo.data.token)
+
+                AsyncStorage.setItem('UserInfo: ', JSON.stringify(userInfo))
+                AsyncStorage.setItem('UserToken: ', userInfo.data.token)
+            }).catch((error) => {
+                setAuthError('Login failed:', error.response ? error.response.data : error.message)
+            });
+          } catch (error) {
+            console.error('Login failed:', error.response ? error.response.data : error.message);
+          }
+
+            setTimeout(() => {
+                    setAuthError('')
+            }, 5000)
     }
-  };
 
-  useEffect(() => {
-    isLoggedIn();
-  }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{ login, logout, autherror, isLoading, userToken }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-};
+    // This is your logout script
+    const logout = () => {
+        setUserToken(null)
+        setIsLoading(false)
+        AsyncStorage.removeItem('UserInfo')
+        AsyncStorage.removeItem('UserToken')
+    }
+
+
+    const isLoggedIn = async () => {
+        try {
+            setIsLoading(true)
+            let userInfo = await AsyncStorage.getItem('UserInfo')
+            let userToken = await AsyncStorage.getItem('UserToken')
+            userInfo = JSON.stringify(userInfo)
+
+            if(userInfo)
+            {
+                setUserInfo(userInfo)
+                setUserToken(userToken)
+            }
+            setIsLoading(false)
+        }
+        catch(e)
+        {
+            console.log(`${e}`);
+            
+        }
+    }
+
+    useEffect(() => {
+        isLoggedIn()
+    }, [])
+
+    return(
+        <AuthContext.Provider value={{login, logout, register, userInfo, autherror, isLoading, userToken}}>
+            {children}
+        </AuthContext.Provider>
+    )
+
+}
