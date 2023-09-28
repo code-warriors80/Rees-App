@@ -10,9 +10,9 @@ import FoodprofileScreen from './screens/FoodprofileScreen';
 import CartScreen from './screens/CartScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
-import AboutScreen from './screens/AboutScreen';
 import LocationScreen from './screens/LocationScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 export default function AuthStack() {
   return (
@@ -25,7 +25,7 @@ export default function AuthStack() {
                                              <Stack.Screen name="FoodProfile" component={FoodprofileScreen} options={{presentation: 'card'}} />
                                              <Stack.Screen name="Cart" component={CartScreen} options={{presentation: 'card'}}/>
                                              <Stack.Screen name="Checkout" component={CheckoutScreen} options={{presentation: 'modal'}}/>
-                                             <Stack.Screen name="About" component={AboutScreen} options={{presentation: 'card'}}/>
+                                             <Stack.Screen name="profile" component={ProfileScreen} options={{presentation: 'card'}}/>
                                              <Stack.Screen name="Location" component={LocationScreen} options={{presentation: 'modal'}}/>
                                              <Stack.Screen name="Password-Reset" component={ResetPasswordScreen} options={{presentation: 'modal'}}/>
                               </Stack.Navigator>

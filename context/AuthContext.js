@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BASE_URL } from "../constant/config";
 import axios from "axios";
+import { Alert } from "react-native";
 
 export const AuthContext = createContext();
 
@@ -15,7 +16,7 @@ export const AuthProvider = ({children}) => {
     // This is your register script
     const register = async (username, email, mobile, password) => {
             try {
-               await axios.post(`${BASE_URL}/register`, {
+              const response = await axios.post(`${BASE_URL}/register`, {
                 username,
                 email,
                 mobile,
@@ -30,24 +31,26 @@ export const AuthProvider = ({children}) => {
 
     // This is your login script
     const login = async (email, password) => {
-        if(email == 'test@gmail.com' && password == 'Incorrect1$')
-        {
-            setUserToken('user3465vcf')
-            AsyncStorage.setItem('UserToken: ', 'user3465vcf')
-        }
-            // await axios.post(`${BASE_URL}/login`, {
-            //   email,
-            //   password
-            // }).then((res) => {
-            //     let userInfo = res.data.token
-            //     setUserInfo(userInfo)
-            //     setUserToken(userInfo.data.token)
-
-            //     AsyncStorage.setItem('UserInfo: ', JSON.stringify(userInfo))
-            //     AsyncStorage.setItem('UserToken: ', userInfo.data.token)
-            // }).catch((error) => {
-            //     setAuthError('Login failed:', error.response ? error.response.data : error.message)
-            // });
+        axios.post(`${BASE_URL}/login`, {
+            email,
+            password,
+          })
+          .then(response => {
+            // Handle successful login
+            console.log('Login successful', response.data);
+            let userInfo = response.data
+            setUserInfo(userInfo)
+            setUserToken(userInfo.token)
+            console.log(userInfo);
+            AsyncStorage.setItem('UserInfo: ', JSON.stringify(userInfo))
+            AsyncStorage.setItem('UserToken: ', userInfo.token)
+            // Navigate to the next screen or perform actions based on the response
+          })
+          .catch(error => {
+            // Handle error
+            console.error('Login error', error);
+            Alert.alert('Login Failed', 'Invalid credentials. Please try again.');
+          });
 
             setTimeout(() => {
                     setAuthError('')

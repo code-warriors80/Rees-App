@@ -15,9 +15,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "allowsArbitraryLoads": true
+        }
+      }
     },
     "android": {
+      "permissions": ["ACCESS_NETWORK_STATE", "INTERNET"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://localhost:3000/users'
+export const BASE_URL = 'https://9d1b-105-112-182-120.ngrok.io/users'

@@ -3,8 +3,11 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import FIcon from "react-native-vector-icons/Feather";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 import { profile } from "../constant";
 import tailwind from "twrnc";
+import { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 
 // ICON
 
@@ -38,6 +41,8 @@ const ListLinkItem = ({ title, icon }) => {
 };
 
 export default function ProfileScreen() {
+  const {userInfo, logout} = useContext(AuthContext)
+  const navigation = useNavigation()
   return (
     <SafeAreaView style={tailwind`flex-1 bg-white p-5`}>
       {/* HEADER START */}
@@ -70,9 +75,9 @@ export default function ProfileScreen() {
         <View
           style={tailwind`bg-white rounded-lg mt-8 pb-4 border-b border-zinc-200`}
         >
-          <ListItem title="Username" text={profile.name} />
-          <ListItem title="Email" text={profile.email} />
-          <ListItem title="Phone" text={profile.phone} />
+          <ListItem title="Username" text={userInfo.user.username} />
+          <ListItem title="Email" text={userInfo.user.email} />
+          <ListItem title="Phone" text={userInfo.user.mobile} />
           <ListItem title="Location">
             <View style={tailwind`flex-row items-center gap-2 my-2`}>
               <Image
@@ -80,7 +85,7 @@ export default function ProfileScreen() {
                 style={tailwind`w-5 h-5`}
               />
               <Text style={tailwind`text-[#F39300] text-xs`}>
-                {profile.address}
+                {userInfo.user.address}
               </Text>
             </View>
           </ListItem>
