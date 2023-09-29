@@ -29,16 +29,15 @@ export default function HomeScreen() {
             <View>
                   {/* HEADER START */}
                   <View style={tailwind`flex-row items-center justify-between p-4 py-3`}>
-
-                        <View style={tailwind`flex-row items-center gap-2`}>
-                              <Image source={require('../assets/icons/pin.png')} style={tailwind`w-7 h-7`}/>
-                              <Text style={tailwind`font-bold text-black`}>{userInfo.user.username}</Text>
-                        </View>
-
                         <View style={tailwind`flex-row items-center gap-4`}>
                               <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-lg`}>
                                           <Image source={require('../assets/icons/bell.png')} style={tailwind`w-5 h-5`}/>
                               </TouchableOpacity>
+                        </View>
+
+                        <View style={tailwind`flex-row items-center gap-2`}>
+                        <Text style={tailwind`font-bold text-black`}>{userInfo.user.username}</Text>
+                              <Image source={require('../assets/user/male.jpg')} style={tailwind`w-10 h-10 rounded-full`}/>
                         </View>
                   </View>
                   {/* HEADER END */}
@@ -52,7 +51,7 @@ export default function HomeScreen() {
                         </View>
 
                         <View style={tailwind`bg-gray-200 p-2 rounded-lg ml-3`}>
-                              <Image source={require('../assets/icons/slider.png')} style={tailwind`w-7 h-7`}/>
+                              <Image source={require('../assets/icons/bell.png')} style={tailwind`w-7 h-7`}/>
                         </View>
                   </View>
                   {/* SEARCH BAR END */}
