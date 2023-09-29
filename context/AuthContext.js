@@ -15,17 +15,23 @@ export const AuthProvider = ({children}) => {
 
     // This is your register script
     const register = async (username, email, mobile, password) => {
-            try {
-              const response = await axios.post(`${BASE_URL}/register`, {
+            axios.post(`${BASE_URL}/register`, {
                 username,
                 email,
                 mobile,
-                address: 'samaru',
+                address: '',
                 password,
-              });
-            } catch (error) {
-              console.error('Registration failed:', error.response ? error.response.data : error.message);
-            }
+            }).then(response => {
+                  console.log('Registration successful', response.data);
+            }).catch((error) => {
+                  // Handle error
+                  setAuthError(`Registration error ${error}`);
+                  setAuthError('Registration', 'Invalid credentials. Please try again.');
+            });
+
+            setTimeout(() => {
+              setAuthError('')
+            }, 5000)
     }
 
 
@@ -34,10 +40,10 @@ export const AuthProvider = ({children}) => {
         axios.post(`${BASE_URL}/login`, {
             email,
             password,
-          })
+        })
           .then(response => {
             // Handle successful login
-            console.log('Login successful', response.data);
+            // console.log('Login successful', response.data);
             let userInfo = response.data
             setUserInfo(userInfo)
             setUserToken(userInfo.token)
@@ -45,12 +51,12 @@ export const AuthProvider = ({children}) => {
             AsyncStorage.setItem('UserInfo: ', JSON.stringify(userInfo))
             AsyncStorage.setItem('UserToken: ', userInfo.token)
             // Navigate to the next screen or perform actions based on the response
-          })
+        })
           .catch(error => {
             // Handle error
-            console.error('Login error', error);
-            Alert.alert('Login Failed', 'Invalid credentials. Please try again.');
-          });
+            setAuthError(`Login error: ${error}`);
+            setAuthError('Login Failed', 'Invalid credentials. Please try again.');
+        });
 
             setTimeout(() => {
                     setAuthError('')

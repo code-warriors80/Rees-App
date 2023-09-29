@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
 import React, {useState, useContext} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tailwind from 'twrnc'
@@ -76,14 +76,12 @@ export default function LoginScreen() {
     }
   };
   return (
-    <SafeAreaView style={tailwind`bg-white flex-1`}>
-      <View style={tailwind`my-25`}>
-        <Text style={tailwind`text-center font-bold text-3xl`}>Hello</Text>
-        <Text style={tailwind`text-center text-gray-500 text-sm my-5`}>
-          Sign in to your account
-        </Text>
-
-        <View style={tailwind`w-full`}>
+    <SafeAreaView style={tailwind`flex-1`}>
+        <View style={tailwind`flex-1 flex-row items-center`}>
+          <Image source={require('../assets/logo.png')} style={tailwind`w-70 h-70 mx-auto`}/>
+        </View>
+      <View style={tailwind`flex-1 bg-white rounded-t-[50px] shadow-2xl py-10`}>
+        <View style={tailwind`w-full bg-white rounded-t-[50px]`}>
           <View style={tailwind`w-[90%] mx-auto`}>
             {checkValidEmail ? (
               <View
@@ -175,18 +173,6 @@ export default function LoginScreen() {
                             </TouchableOpacity>
                         </View>
 
-                        <Text style={tailwind`text-center text-gray-500 text-xs my-4`}>Or</Text>
-                        <View style={tailwind`flex-row items-center justify-center gap-5`}>
-                            <TouchableOpacity style={tailwind`bg-blue-500 p-3 rounded-full`}>
-                                <FIcon name='facebook' size={18} color='white'/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={tailwind`bg-blue-400 p-3 rounded-full`}>
-                                <FIcon name='twitter' size={18} color='white'/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={tailwind`bg-[#FA5758] p-3 rounded-full`}>
-                                <FIcon name='instagram' size={18} color='white'/>
-                            </TouchableOpacity>
-                        </View>
                     </View>
                 </View>  
             </View>

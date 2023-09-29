@@ -12,6 +12,7 @@ import CheckoutScreen from '../screens/CheckoutScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LocationScreen from '../screens/LocationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 
 export default function AppStack() {
   return (
@@ -26,6 +27,7 @@ export default function AppStack() {
                                              <Stack.Screen name="Checkout" component={CheckoutScreen} options={{presentation: 'modal'}}/>
                                              <Stack.Screen name="Profile" component={ProfileScreen} options={{presentation: 'card'}}/>
                                              <Stack.Screen name="Location" component={LocationScreen} options={{presentation: 'modal'}}/>
+                                             <Stack.Screen name="Password-Reset" component={ResetPasswordScreen} options={{presentation: 'modal'}}/>
                               </Stack.Navigator>
                </NavigationContainer>
   )

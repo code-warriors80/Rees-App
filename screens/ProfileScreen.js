@@ -29,10 +29,10 @@ const ListItem = ({ title, text, children }) => {
   );
 };
 
-const ListLinkItem = ({ title, icon }) => {
+const ListLinkItem = ({ title, icon, link }) => {
   return (
     <TouchableOpacity
-      style={tailwind`flex flex-row items-center justify-between py-2`} >
+      style={tailwind`flex flex-row items-center justify-between py-2`} onPress={link}>
       <Text style={tailwind`text-base font-semibold`}>{title}</Text>
 
       <FIcon name={icon || "chevrons-right"} size={20} color="black" />
@@ -94,8 +94,8 @@ export default function ProfileScreen() {
         <View style={tailwind`bg-white rounded-lg mt-5 pb-4`}>
           <ListLinkItem title="Payments" />
           <ListLinkItem title="Settings" />
-          <ListLinkItem title="Password & security" />
-          <ListLinkItem title="Sign out" icon="log-out" />
+          <ListLinkItem title="Password & security" link={() => navigation.navigate('Password-Reset')}/>
+          <ListLinkItem title="Sign out" icon="log-out" link={() => logout()}/>
         </View>
       </ScrollView>
 

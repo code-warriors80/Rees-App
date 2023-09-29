@@ -5,6 +5,7 @@ import tailwind from 'twrnc'
 import FIcon from 'react-native-vector-icons/Feather'
 import { useNavigation } from '@react-navigation/native'
 import { AuthContext } from '../context/AuthContext'
+import { Image } from 'react-native'
 
 export default function RegisterScreen() {
     const {register} = useContext(AuthContext)
@@ -138,12 +139,13 @@ export default function RegisterScreen() {
      }
     }
   return (
-    <SafeAreaView style={tailwind`bg-white flex-1`}>
-        <View style={tailwind`my-15`}>
-            <Text style={tailwind`text-center font-bold text-2xl`}>Create account</Text>
-
+    <SafeAreaView style={tailwind`flex-1`}>
+        <View style={tailwind`flex-1 flex-row items-center`}>
+        <Image source={require('../assets/logo.png')} style={tailwind`w-70 h-70 mx-auto`}/>
+        </View>
+        <View style={tailwind`bg-white rounded-t-[50px] shadow-2xl`}>
             <View style={tailwind`w-full`}>
-                <View style={tailwind`w-[90%] mt-7 mx-auto`}>
+                <View style={tailwind`w-[90%] my-3 mx-auto`}>
                     {checkValidUsername ? (
                         <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full border border-red-500 shadow my-2 flex-row items-center gap-2`}>
                             <FIcon name='user' size={15} color='red'/>
@@ -218,11 +220,11 @@ export default function RegisterScreen() {
 
                     {username == '' || email == '' || mobile == '' || password == '' || setCheckValidUsername == true || setCheckValidEmail == true || setCheckValidMobile == true || setCheckValidPassword == true ? 
                     (
-                        <TouchableOpacity disabled style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}>
+                        <TouchableOpacity disabled style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`}>
                             <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
                         </TouchableOpacity>
                     ) : (
-                        <TouchableOpacity style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`} onPress={() => register(username, email, mobile, password)}>
+                        <TouchableOpacity style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`} onPress={() => register(username, email, mobile, password)}>
                             <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
                         </TouchableOpacity>
                     )}
@@ -234,18 +236,6 @@ export default function RegisterScreen() {
                             <Text style={tailwind`text-center text-gray-500 text-xs`}>Aleady Have An Account</Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                                 <Text style={tailwind`text-xs text-[#F39300]`}>Login</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <Text style={tailwind`text-center text-gray-500 text-xs my-4`}>Or</Text>
-                        <View style={tailwind`flex-row items-center justify-center gap-5`}>
-                            <TouchableOpacity style={tailwind`bg-blue-500 p-3 rounded-full`}>
-                                <FIcon name='facebook' size={18} color='white'/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={tailwind`bg-blue-400 p-3 rounded-full`}>
-                                <FIcon name='twitter' size={18} color='white'/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={tailwind`bg-[#FA5758] p-3 rounded-full`}>
-                                <FIcon name='instagram' size={18} color='white'/>
                             </TouchableOpacity>
                         </View>
                     </View>

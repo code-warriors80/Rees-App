@@ -32,7 +32,7 @@ export default function HomeScreen() {
 
                         <View style={tailwind`flex-row items-center gap-2`}>
                               <Image source={require('../assets/icons/pin.png')} style={tailwind`w-7 h-7`}/>
-                              <Text style={tailwind`font-bold text-black`}>{userInfo.user.email}</Text>
+                              <Text style={tailwind`font-bold text-black`}>{userInfo.user.username}</Text>
                         </View>
 
                         <View style={tailwind`flex-row items-center gap-4`}>

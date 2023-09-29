@@ -12,7 +12,7 @@ import FIcon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import tailwind from "twrnc";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 export default function ResetPasswordScreen({ navigation }) {
   const isFocused = useIsFocused();
@@ -123,7 +123,18 @@ export default function ResetPasswordScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={tailwind`bg-white flex-1`}>
-        <View style={tailwind`my-15`}>
+      <View style={tailwind`flex-row items-center justify-between p-5`}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={tailwind`bg-white p-2 rounded-full shadow-lg`}
+        >
+          <FIcon name="arrow-left" size={20} color="black" />
+        </TouchableOpacity>
+
+        {/* <Text style={tailwind`text-[16px] font-bold mx-auto`}>Profile</Text> */}
+      </View>
+
+        <View style={tailwind`my-10`}>
           <Text style={tailwind`text-center font-bold text-2xl`}>
             Reset Password
           </Text>
@@ -172,7 +183,7 @@ export default function ResetPasswordScreen({ navigation }) {
                   color={!isValidPassword ? "red" : "gray"}
                 />
                 <TextInput
-                  placeholder="Create a Password"
+                  placeholder="Current Password"
                   placeholderTextColor={isValidPassword ? "gray" : "red"}
                   style={
                     isValidPassword
@@ -207,7 +218,7 @@ export default function ResetPasswordScreen({ navigation }) {
                   color={doesPasswordMatch ? "gray" : "red"}
                 />
                 <TextInput
-                  placeholder="Confirm Password"
+                  placeholder="New Password"
                   placeholderTextColor={doesPasswordMatch ? "gray" : "red"}
                   style={
                     !doesPasswordMatch
@@ -269,21 +280,6 @@ export default function ResetPasswordScreen({ navigation }) {
                   Reset Password
                 </Text>
               </TouchableOpacity>
-
-              <View>
-                <View
-                  style={tailwind`flex-row items-center justify-center gap-1 mt-4`}
-                >
-                  <Text style={tailwind`text-center text-gray-500 text-xs`}>
-                    Aleady Have An Account
-                  </Text>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate("Login")}
-                  >
-                    <Text style={tailwind`text-xs text-[#F39300]`}>Login</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
             </View>
           </View>
         </View>

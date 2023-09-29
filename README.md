@@ -10,6 +10,12 @@ npm install @react-native-async-storage/async-storage
 MongoDB Connection string
 'mongodb+srv://codewarriors02:incorrect@rees-app.mdtcwt2.mongodb.net/'
 
+npm install -g ngrok
+
+
+start server
+ngrok http 3000
+
 Screens Allocation
 
 Savage
