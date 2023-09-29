@@ -407,7 +407,7 @@ export const about = [
 
 export const profile = {
   id: 1,
-  image: require("../assets/5526265.jpg"),
+  image: require("../assets/user/male.jpg"),
   name: "Christiana",
   email: "@christianreejoyce2@gmail.com",
   phone: "0901212121212",

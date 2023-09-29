@@ -62,7 +62,7 @@ export default function ProfileScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          <Image source={profile.image} style={tailwind`w-50 h-50 mx-auto`} />
+          <Image source={profile.image} style={tailwind`w-40 h-40 mx-auto rounded-full`} />
           <Text style={tailwind`text-center text-lg font-bold`}>
             Account Details
           </Text>

@@ -9,6 +9,7 @@ import { AuthContext } from '../context/AuthContext'
 export default function LoginScreen() {
   // context value is passed on the login button
   const { login, autherror } = useContext(AuthContext);
+  const {disable, setDisabled} = useState(true)
   const navigation = useNavigation();
   const [passwordSecure, setPasswordSecure] = useState(true);
   const [email, setEmail] = useState("");
@@ -77,73 +78,37 @@ export default function LoginScreen() {
   };
   return (
     <SafeAreaView style={tailwind`flex-1`}>
-        <View style={tailwind`flex-1 flex-row items-center`}>
-          <Image source={require('../assets/logo.png')} style={tailwind`w-70 h-70 mx-auto`}/>
+        <View style={tailwind`p-10`}>
+          <Image source={require('../assets/logo.png')} style={tailwind`w-70 h-50 mx-auto`}/>
         </View>
       <View style={tailwind`flex-1 bg-white rounded-t-[50px] shadow-2xl py-10`}>
         <View style={tailwind`w-full bg-white rounded-t-[50px]`}>
           <View style={tailwind`w-[90%] mx-auto`}>
-            {checkValidEmail ? (
-              <View
-                style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto border border-red-500 rounded-full shadow my-2 flex-row items-center gap-2`}
-              >
-                <FIcon name="user" size={15} color="red" />
-                <TextInput
-                  placeholder="email"
-                  style={tailwind`text-xs flex-1 text-red-500`}
-                  value={email}
-                  onChangeText={(text) => handelCheckEmail(text)}
-                />
-              </View>
-            ) : (
-              <View
-                style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}
-              >
-                <FIcon name="user" size={15} color="gray" />
-                <TextInput
-                  placeholder="email"
-                  style={tailwind`text-xs flex-1 text-gray-500`}
-                  value={email}
-                  onChangeText={(text) => handelCheckEmail(text)}
-                />
-              </View>
-            )}
 
-            {checkValidPassword ? (
               <View
-                style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto border border-red-500 rounded-full shadow my-2 flex-row items-center gap-2`}
+                style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidEmail ? 'border border-red-500' : ''}`}
               >
-                <FIcon name="lock" size={15} color="red" />
+                <FIcon name="user" size={15} color={checkValidEmail ? "red" : "gray"} />
                 <TextInput
-                  placeholder="Password"
-                  style={tailwind`text-xs flex-1 text-red-500`}
+                  placeholder="email"
+                  style={tailwind`text-xs flex-1 ${checkValidEmail ? 'text-red-500' : 'text-gray-500'}`}
+                  value={email}
+                  onChangeText={(text) => handelCheckEmail(text)}
+                />
+              </View>
+
+              <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidPassword ? 'border border-red-500' : ''}`}>
+                <FIcon name="lock" size={15} color={checkValidPassword ? "red" : "gray"} />
+                <TextInput placeholder="Password" style={tailwind`text-xs flex-1  ${checkValidPassword ? 'text-red-500' : 'text-gray-500'}`}
                   value={password}
                   onChangeText={(text) => handelCheckPassword(text)}
                   secureTextEntry={passwordSecure}
                 />
 
                 <TouchableOpacity onPress={seePassword}>
-                  <FIcon name="eye" size={15} color="red" />
+                  <FIcon name="eye" size={15} color={checkValidPassword ? "red" : "gray"}/>
                 </TouchableOpacity>
               </View>
-            ) : (
-              <View
-                style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}
-              >
-                <FIcon name="lock" size={15} color="gray" />
-                <TextInput
-                  placeholder="Password"
-                  style={tailwind`text-xs flex-1`}
-                  value={password}
-                  onChangeText={(text) => handelCheckPassword(text)}
-                  secureTextEntry={passwordSecure}
-                />
-
-                <TouchableOpacity onPress={seePassword}>
-                  <FIcon name="eye" size={15} color="gray" />
-                </TouchableOpacity>
-              </View>
-            )}
 
             <TouchableOpacity
               onPress={() => navigation.navigate("Reset-Password")}
@@ -154,16 +119,10 @@ export default function LoginScreen() {
               </Text>
             </TouchableOpacity>
 
-            {email == '' || password == '' || checkValidEmail == true || checkValidPassword == true ? (
-                        <TouchableOpacity disabled style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}>
+            <TouchableOpacity disabled={email == '' || password == '' || setCheckValidEmail == true ||  setCheckValidPassword == true ? true : false} style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-2 py-4`}
+                        onPress={() => login(email, password)}>
                             <Text style={tailwind`text-center text-white font-bold`}>Login</Text>
-                        </TouchableOpacity>
-            ): (
-                        <TouchableOpacity style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`} onPress={() => login(email, password)}>
-                            <Text style={tailwind`text-center text-white font-bold`}>Login</Text>
-                        </TouchableOpacity>
-            )}
-                    <Text style={tailwind`text-center text-xs mt-2 text-red-500`}>{autherror}</Text>
+            </TouchableOpacity>
 
                     <View>
                         <View style={tailwind`flex-row items-center justify-center gap-1 mt-4`}>

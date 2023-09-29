@@ -140,94 +140,45 @@ export default function RegisterScreen() {
     }
   return (
     <SafeAreaView style={tailwind`flex-1`}>
-        <View style={tailwind`flex-1 flex-row items-center`}>
-        <Image source={require('../assets/logo.png')} style={tailwind`w-70 h-70 mx-auto`}/>
+        <View style={tailwind`flex-row py-3`}>
+            <Image source={require('../assets/logo.png')} style={tailwind`w-70 h-50 mx-auto`}/>
         </View>
-        <View style={tailwind`bg-white rounded-t-[50px] shadow-2xl`}>
+        <View style={tailwind`flex-1 bg-white rounded-t-[50px] shadow-2xl`}>
             <View style={tailwind`w-full`}>
                 <View style={tailwind`w-[90%] my-3 mx-auto`}>
-                    {checkValidUsername ? (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full border border-red-500 shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='user' size={15} color='red'/>
-                            <TextInput placeholder='Username' style={tailwind`text-xs flex-1 text-red-500`} value={username} onChangeText={(text) => handelCheckUsername(text)}/>
+                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidUsername ? 'border border-red-500' : ''}`}>
+                            <FIcon name='user' size={15} color={checkValidUsername ? 'red' : 'gray'}/>
+                            <TextInput placeholder='Username' style={tailwind`text-xs flex-1 ${checkValidMobile ? 'text-red-500' : 'text-gray-400'}`} value={username} onChangeText={(text) => handelCheckUsername(text)}/>
                         </View>
-                    ): (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='user' size={15} color='gray'/>
-                            <TextInput placeholder='Username' style={tailwind`text-xs flex-1`} value={username} onChangeText={(text) => handelCheckUsername(text)}/>
-                        </View>
-                    )}
 
-                    {checkValidEmail ? (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto border border-red-500 rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='mail' size={15} color='red'/>
-                            <TextInput placeholder='Email' style={tailwind`text-xs flex-1 text-red-500`} value={email} onChangeText={text => handelCheckEmail(text)}/>
+                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidEmail ? 'border border-red-500' : ''}`}>
+                            <FIcon name='mail' size={15} color={checkValidEmail ? 'red' : 'gray'}/>
+                            <TextInput placeholder='Email' style={tailwind`text-xs flex-1 ${checkValidEmail ? 'text-red-500' : 'text-gray-400'}`} value={email} onChangeText={text => handelCheckEmail(text)}/>
                         </View>
-                    ) : (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='mail' size={15} color='gray'/>
-                            <TextInput placeholder='Email' style={tailwind`text-xs flex-1`} value={email} onChangeText={text => handelCheckEmail(text)}/>
-                        </View>
-                    )}
 
 
-                    {checkValidMobile ? (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white border border-red-500 mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='phone' size={15} color='red'/>
-                            <TextInput placeholder='Mobile' style={tailwind`text-xs flex-1 text-red-500`} keyboardType='numeric' value={mobile} onChangeText={(text) => handelCheckMobile(text)}/>
+                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidMobile ? 'border border-red-500' : ''}`}>
+                            <FIcon name='phone' size={15} color={checkValidMobile ? 'red' : 'gray'}/>
+                            <TextInput placeholder='Mobile' style={tailwind`text-xs flex-1 ${checkValidMobile ? 'text-red-500' : 'text-gray-400'}`} keyboardType='numeric' value={mobile} onChangeText={(text) => handelCheckMobile(text)}/>
                         </View>
-                    ) : (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='phone' size={15} color='gray'/>
-                            <TextInput placeholder='Mobile' style={tailwind`text-xs flex-1`} keyboardType='numeric' value={mobile} onChangeText={(text) => handelCheckMobile(text)}/>
-                        </View>
-                    )}
 
-                    {/* {checkValidAddress ? (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white border border-red-500 mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='map-pin' size={15} color='red'/>
-                            <TextInput placeholder='Address' style={tailwind`text-xs flex-1 text-red-500`} value={address} onChangeText={(text) => handelCheckAddress(text)}/>
-                        </View>
-                    ) : (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='map-pin' size={15} color='gray'/>
-                            <TextInput placeholder='Address' style={tailwind`text-xs flex-1`} value={address} onChangeText={(text) => handelCheckAddress(text)}/>
-                        </View>
-                    )} */}
 
-                    {checkValidPassword ? (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white border border-red-500 mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='lock' size={15} color='red'/>
-                            <TextInput placeholder='Password' style={tailwind`text-xs flex-1 text-red-500`} secureTextEntry={passwordSecure} value={password} onChangeText={(text) => handelCheckPassword(text)}/>
+                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidPassword ? ' border border-red-500' : ''}`}>
+                            <FIcon name='lock' size={15} color={checkValidPassword ? 'red' : 'gray'}/>
+                            <TextInput placeholder='Password' style={tailwind`text-xs flex-1 ${checkValidPassword ? 'text-red-500' : 'text-gray-400'}`} secureTextEntry={passwordSecure} value={password} onChangeText={(text) => handelCheckPassword(text)}/>
                             <TouchableOpacity onPress={seePassword}>
-                                <FIcon name='eye' size={15} color='red'/>
+                                <FIcon name='eye' size={15} color={checkValidPassword ? 'red' : 'gray'}/>
                             </TouchableOpacity>
                         </View>
-                    ) : (
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`}>
-                            <FIcon name='lock' size={15} color='gray'/>
-                            <TextInput placeholder='Password' style={tailwind`text-xs flex-1`} secureTextEntry={passwordSecure} value={password} onChangeText={(text) => handelCheckPassword(text)}/>
-                            <TouchableOpacity onPress={seePassword}>
-                                <FIcon name='eye' size={15} color='gray'/>
-                            </TouchableOpacity>
-                        </View>
-                    )}
 
 
                     <TouchableOpacity style={tailwind`my-2`}>
                         <Text style={tailwind`text-right text-gray-500 text-xs mr-8`}>Forgot your password?</Text>
                     </TouchableOpacity>
 
-                    {username == '' || email == '' || mobile == '' || password == '' || setCheckValidUsername == true || setCheckValidEmail == true || setCheckValidMobile == true || setCheckValidPassword == true ? 
-                    (
-                        <TouchableOpacity disabled style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`}>
-                            <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
-                        </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`} onPress={() => register(username, email, mobile, password)}>
-                            <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
-                        </TouchableOpacity>
-                    )}
+                    <TouchableOpacity disabled={username == '' || email == '' || mobile == '' || password == '' || setCheckValidUsername == true || setCheckValidEmail == true || setCheckValidMobile == true || setCheckValidPassword == true ? true : false} style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`} onPress={() => register(username, email, mobile, password)}>
+                        <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
+                    </TouchableOpacity>
 
 
                     <View>
