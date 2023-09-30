@@ -104,7 +104,7 @@ export default function CheckoutScreen() {
         </View>
         {/* ORDER TOTAL START */}
 
-        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => navigation.navigate('Checkout')}>
+        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => navigation.navigate()}>
           <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Pay Now</Text>
         </TouchableOpacity>
     </SafeAreaView>
