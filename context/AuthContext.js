@@ -14,7 +14,7 @@ export const AuthProvider = ({children}) => {
     
 
     // This is your register script
-    const register = async (username, email, mobile, password) => {
+    const register = async (username, email, mobile, password, navigation) => {
             axios.post(`${BASE_URL}/register`, {
                 username,
                 email,
@@ -22,11 +22,14 @@ export const AuthProvider = ({children}) => {
                 address: '',
                 password,
             }).then(response => {
-                  console.log('Registration successful', response.data);
+                //   console.log('Registration successful', response.data);
+                  Alert.alert('Registration successful')
+                  navigation.navigate('Login')
             }).catch((error) => {
                   // Handle error
-                  setAuthError(`Registration error ${error}`);
-                  setAuthError('Registration', 'Invalid credentials. Please try again.');
+                //   setAuthError(`Registration error ${error}`);
+                //   setAuthError('Registration', 'Invalid credentials. Please try again.');
+                  Alert.alert('Invalid credentials')
             });
 
             setTimeout(() => {
@@ -54,8 +57,10 @@ export const AuthProvider = ({children}) => {
         })
           .catch(error => {
             // Handle error
-            setAuthError(`Login error: ${error}`);
-            setAuthError('Login Failed', 'Invalid credentials. Please try again.');
+            // setAuthError(`Login error: ${error}`);
+            // setAuthError('Login Failed', 'Invalid credentials. Please try again.');
+            Alert.alert('Invalid credentials')
+            
         });
 
             setTimeout(() => {
@@ -70,6 +75,23 @@ export const AuthProvider = ({children}) => {
         setIsLoading(false)
         AsyncStorage.removeItem('UserInfo')
         AsyncStorage.removeItem('UserToken')
+    }
+
+    const ChangePassword = (email, password, newPassword, navigation) => {
+        axios.put(`${BASE_URL}/updatepassword`, {
+            email,
+            password,
+            newPassword
+        }).then(response => {
+            //   console.log('Registration successful', response.data);
+              Alert.alert('Password Reset successful')
+              navigation.goBack()
+        }).catch((error) => {
+              // Handle error
+            //   setAuthError(`Registration error ${error}`);
+            //   setAuthError('Registration', 'Invalid credentials. Please try again.');
+              Alert.alert('Invalid credentials')
+        });
     }
 
 
@@ -99,7 +121,7 @@ export const AuthProvider = ({children}) => {
     }, [])
 
     return(
-        <AuthContext.Provider value={{login, logout, register, userInfo, autherror, isLoading, userToken}}>
+        <AuthContext.Provider value={{login, logout,  register, ChangePassword, userInfo, autherror, isLoading, userToken}}>
             {children}
         </AuthContext.Provider>
     )

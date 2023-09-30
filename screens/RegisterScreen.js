@@ -148,7 +148,7 @@ export default function RegisterScreen() {
                 <View style={tailwind`w-[90%] my-3 mx-auto`}>
                         <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidUsername ? 'border border-red-500' : ''}`}>
                             <FIcon name='user' size={15} color={checkValidUsername ? 'red' : 'gray'}/>
-                            <TextInput placeholder='Username' style={tailwind`text-xs flex-1 ${checkValidMobile ? 'text-red-500' : 'text-gray-400'}`} value={username} onChangeText={(text) => handelCheckUsername(text)}/>
+                            <TextInput placeholder='Username' style={tailwind`text-xs flex-1 ${checkValidUsername ? 'text-red-500' : 'text-gray-400'}`} value={username} onChangeText={(text) => handelCheckUsername(text)}/>
                         </View>
 
                         <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidEmail ? 'border border-red-500' : ''}`}>
@@ -176,10 +176,14 @@ export default function RegisterScreen() {
                         <Text style={tailwind`text-right text-gray-500 text-xs mr-8`}>Forgot your password?</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity disabled={username == '' || email == '' || mobile == '' || password == '' || setCheckValidUsername == true || setCheckValidEmail == true || setCheckValidMobile == true || setCheckValidPassword == true ? true : false} style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`} onPress={() => register(username, email, mobile, password)}>
+                    <TouchableOpacity disabled={username == '' || email == '' || mobile == '' 
+                        || password == '' || setCheckValidUsername == true || setCheckValidEmail == true 
+                        || setCheckValidMobile == true || setCheckValidPassword == true ? true : false} 
+                        style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`} 
+                        onPress={() => register(username, email, mobile, password, navigation)}>
+
                         <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
                     </TouchableOpacity>
-
 
                     <View>
 

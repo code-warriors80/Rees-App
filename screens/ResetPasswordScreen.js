@@ -6,20 +6,22 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import FIcon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import tailwind from "twrnc";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
 
 export default function ResetPasswordScreen({ navigation }) {
+  const {ChangePassword} = useContext(AuthContext)
   const isFocused = useIsFocused();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [otp, setOtp] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  // const [otp, setOtp] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isValidOtp, setIsValidOtp] = useState(false);
@@ -33,7 +35,6 @@ export default function ResetPasswordScreen({ navigation }) {
     }
   }, [isFocused]);
 
-  const doesPasswordMatch = confirmPassword === password;
 
   const handelCheckEmail = (text) => {
     let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -87,30 +88,57 @@ export default function ResetPasswordScreen({ navigation }) {
     }
   };
 
-  const handelCheckOtp = (text) => {
-    let isNumeric = /^[0-9]+$/;
 
-    setOtp(text);
-    if (text == "" || text.length < 6) {
-      setIsValidOtp(false);
+  const handelCheckNewPassword = (text) => {
+    setNewPassword(text);
+    if (text == "") {
+      setIsValidPassword(false);
     } else {
-      if (isNumeric.test(text)) {
-        setIsValidOtp(true);
-      } else {
-        setIsValidEmail(false);
+      if (text.length < 8) {
+        return setIsValidPassword(false);
       }
-    }
-  };
 
-  const handelRegister = () => {
-    if (
-      isValidEmail === false ||
-      isValidPassword === false ||
-      isValidOtp === false
-    ) {
-      Alert.alert("Please fill all fields correctly");
+      // Check if the password contains at least one uppercase letter
+      if (!/[A-Z]/.test(text)) {
+        return setIsValidPassword(false);
+      }
+
+      // Check if the password contains at least one lowercase letter
+      if (!/[a-z]/.test(text)) {
+        return setIsValidPassword(false);
+      }
+
+      // Check if the password contains at least one number
+      if (!/[0-9]/.test(text)) {
+        return setIsValidPassword(false);
+      }
+
+      // Check if the password contains at least one special character
+      if (!/[$@$!%*?&]/.test(text)) {
+        return setIsValidPassword(false);
+      }
+
+      if (/\s/.test(text)) {
+        return setIsValidPassword(false);
+      }
+
+      return setIsValidPassword(true);
     }
   };
+  // const handelCheckOtp = (text) => {
+  //   let isNumeric = /^[0-9]+$/;
+
+  //   setOtp(text);
+  //   if (text == "" || text.length < 6) {
+  //     setIsValidOtp(false);
+  //   } else {
+  //     if (isNumeric.test(text)) {
+  //       setIsValidOtp(true);
+  //     } else {
+  //       setIsValidEmail(false);
+  //     }
+  //   }
+  // };
 
   const seePassword = () => {
     if (passwordSecure == true) {
@@ -207,38 +235,38 @@ export default function ResetPasswordScreen({ navigation }) {
                 style={tailwind.style(
                   `w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`,
                   {
-                    border: !doesPasswordMatch,
-                    "border-red-500": !doesPasswordMatch,
+                    border: !isValidPassword,
+                    "border-red-500": !isValidPassword,
                   }
                 )}
               >
                 <FIcon
                   name="lock"
                   size={15}
-                  color={doesPasswordMatch ? "gray" : "red"}
+                  color={isValidPassword ? "gray" : "red"}
                 />
                 <TextInput
                   placeholder="New Password"
-                  placeholderTextColor={doesPasswordMatch ? "gray" : "red"}
+                  placeholderTextColor={isValidPassword ? "gray" : "red"}
                   style={
-                    !doesPasswordMatch
+                    !isValidPassword
                       ? tailwind`text-xs flex-1 text-red-500`
                       : tailwind`text-xs flex-1`
                   }
                   secureTextEntry={passwordSecure}
-                  value={confirmPassword}
-                  onChangeText={(text) => setConfirmPassword(text)}
+                  value={newPassword}
+                  onChangeText={(text) => setNewPassword(text)}
                 />
                 <TouchableOpacity onPress={seePassword}>
                   <FIcon
                     name="eye"
                     size={15}
-                    color={doesPasswordMatch ? "gray" : "red"}
+                    color={isValidPassword ? "gray" : "red"}
                   />
                 </TouchableOpacity>
               </View>
 
-              <View
+              {/* <View
                 style={tailwind.style(
                   `w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`,
                   {
@@ -265,16 +293,15 @@ export default function ResetPasswordScreen({ navigation }) {
                   value={otp}
                   onChangeText={(text) => handelCheckOtp(text)}
                 />
-              </View>
+              </View> */}
 
               <TouchableOpacity
                 disabled={
                   email.length === 0 ||
-                  password.length === 0 ||
-                  otp.length === 0
+                  password.length === 0
                 }
                 style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}
-                onPress={handelRegister}
+                onPress={() => ChangePassword(email, password, newPassword, navigation)}
               >
                 <Text style={tailwind`text-center text-white font-bold`}>
                   Reset Password
