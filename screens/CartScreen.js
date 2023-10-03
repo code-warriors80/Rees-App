@@ -1,5 +1,5 @@
 import { View, Text , TouchableOpacity, ScrollView, Image} from 'react-native'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 // ICON
@@ -15,16 +15,36 @@ import { useNavigation } from '@react-navigation/native';
 // REDUX
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart, selectCartItem, selectCartTotal } from '../slice/cartSlice'
+import { AuthContext } from '../context/AuthContext'
 
 
 export default function CartScreen() {
   const dispatch = useDispatch()
+  const {userInfo} = useContext(AuthContext)
   const navigation = useNavigation()
   const cartItems = useSelector(selectCartItem)
   const cartTotal = useSelector(selectCartTotal)
   const [groupitems, setGroupItems] = useState({})
 
-  const delivery = 300
+  let delivery = 0
+
+  switch(userInfo.user.location)
+  {
+    case 'Samaru':
+      delivery = 400
+      break;
+    case 'Sabon Gari':
+      delivery = 100
+      break;
+    case 'Kongo':
+      delivery = 250
+      break;
+    case 'PZ':
+      delivery = 150
+      break;
+    default:
+      delivery
+  }
 
   useEffect(() => {
     const items = cartItems.reduce((group, item) => {

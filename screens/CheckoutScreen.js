@@ -10,16 +10,38 @@ import { useNavigation } from '@react-navigation/native';
 
 // TAILWIND
 import tailwind from 'twrnc';
+import {useContext} from 'react'
 
 // REDUX
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectCartItem, selectCartTotal } from '../slice/cartSlice';
+import { AuthContext } from '../context/AuthContext';
 
 export default function CheckoutScreen() {
+  const {userInfo} = useContext(AuthContext)
   const navigation = useNavigation()
   const cartItems = useSelector(selectCartItem)
   const cartTotal = useSelector(selectCartTotal)
-  const delivery = 300
+
+  let delivery = 0
+
+  switch(userInfo.user.location)
+  {
+    case 'Samaru':
+      delivery = 400
+      break;
+    case 'Sabon Gari':
+      delivery = 100
+      break;
+    case 'Kongo':
+      delivery = 250
+      break;
+    case 'PZ':
+      delivery = 150
+      break;
+    default:
+      delivery
+  }
   return (
     <SafeAreaView style={tailwind`px-7 py-3 flex-1 bg-white`}>
         {/* HEADER START */}
@@ -35,13 +57,13 @@ export default function CheckoutScreen() {
         <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
               {/* ORDER ADDRESS */}
               <View style={tailwind`m-1`}>
-                    <Text style={tailwind`font-bold mb-4`}>Shipping Address</Text>
+                    <Text style={tailwind`font-bold mb-4`}>Deivery Address</Text>
                     <TouchableOpacity style={tailwind`flex-row items-center justify-between w-full bg-[#F39300] rounded-lg p-3 shadow-lg`} onPress={() => navigation.navigate('Location')}>
                         <View style={tailwind`flex-row items-center gap-3`}>
                               <Image source={require('../assets/3d-view-map.jpg')} style={tailwind`w-15 h-15 rounded-lg`}/>
                               <View style={tailwind`w-[68%]`}>
                                   <Text style={tailwind`text-white font-bold mb-1 text-sm`}>Home</Text>
-                                  <Text style={tailwind`text-gray-200 text-xs `}>lagos street Sabon Gari Zaria Kaduna State</Text>
+                                  <Text style={tailwind`text-gray-200 text-xs `}>{userInfo.user.address}</Text>
                               </View>
                         </View>
                         <FIcon name='chevron-right' size={15} color='white'/>

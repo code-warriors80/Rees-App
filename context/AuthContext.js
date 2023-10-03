@@ -40,7 +40,7 @@ export const AuthProvider = ({children}) => {
 
     // This is your login script
     const login = async (email, password) => {
-        axios.post(`${BASE_URL}/login`, {
+        const response = axios.post(`${BASE_URL}/login`, {
             email,
             password,
         })
@@ -94,13 +94,28 @@ export const AuthProvider = ({children}) => {
         });
     }
 
+    const UpdateUserData = (address) => {
+        axios.put(`${BASE_URL}/updateuser/${userInfo.user._id}`, {
+            address
+        }).then(response => {
+            //   console.log('Registration successful', response.data);
+              Alert.alert('User Data Reset successful')
+
+        }).catch((error) => {
+              // Handle error
+            //   setAuthError(`Registration error ${error}`);
+            //   setAuthError('Registration', 'Invalid credentials. Please try again.');
+              Alert.alert('Invalid credentials')
+        });
+    }
+
 
     const isLoggedIn = async () => {
         try {
             setIsLoading(true)
             let userInfo = await AsyncStorage.getItem('UserInfo')
             let userToken = await AsyncStorage.getItem('UserToken')
-            userInfo = JSON.stringify(userInfo)
+            userInfo = JSON.parse(userInfo)
 
             if(userInfo)
             {
@@ -121,7 +136,7 @@ export const AuthProvider = ({children}) => {
     }, [])
 
     return(
-        <AuthContext.Provider value={{login, logout,  register, ChangePassword, userInfo, autherror, isLoading, userToken}}>
+        <AuthContext.Provider value={{login, logout,  register, ChangePassword, UpdateUserData, userInfo, autherror, isLoading, userToken}}>
             {children}
         </AuthContext.Provider>
     )

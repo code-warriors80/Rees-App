@@ -21,17 +21,16 @@ export default function ResetPasswordScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  // const [otp, setOtp] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
-  const [isValidOtp, setIsValidOtp] = useState(false);
+  const [isValidNewPassword, setIsValidNewPassword] = useState(false);
   const [passwordSecure, setPasswordSecure] = useState(true);
 
   useEffect(() => {
     if (isFocused) {
       setIsValidEmail(true);
       setIsValidPassword(true);
-      setIsValidOtp(true);
+      setIsValidNewPassword(true);
     }
   }, [isFocused]);
 
@@ -41,7 +40,7 @@ export default function ResetPasswordScreen({ navigation }) {
 
     setEmail(text);
     if (text == "") {
-      setIsValidEmail(false);
+      setIsValidEmail(true);
     } else {
       if (re.test(text)) {
         setIsValidEmail(true);
@@ -54,7 +53,7 @@ export default function ResetPasswordScreen({ navigation }) {
   const handelCheckPassword = (text) => {
     setPassword(text);
     if (text == "") {
-      setIsValidPassword(false);
+      setIsValidPassword(true);
     } else {
       if (text.length < 8) {
         return setIsValidPassword(false);
@@ -92,38 +91,39 @@ export default function ResetPasswordScreen({ navigation }) {
   const handelCheckNewPassword = (text) => {
     setNewPassword(text);
     if (text == "") {
-      setIsValidPassword(false);
+      setIsValidNewPassword(true);
     } else {
       if (text.length < 8) {
-        return setIsValidPassword(false);
+        return setIsValidNewPassword(false);
       }
 
       // Check if the password contains at least one uppercase letter
       if (!/[A-Z]/.test(text)) {
-        return setIsValidPassword(false);
+        return setIsValidNewPassword(false);
       }
 
       // Check if the password contains at least one lowercase letter
       if (!/[a-z]/.test(text)) {
-        return setIsValidPassword(false);
+        return setIsValidNewPassword(false);
       }
 
       // Check if the password contains at least one number
       if (!/[0-9]/.test(text)) {
-        return setIsValidPassword(false);
+        return setIsValidNewPassword(false);
       }
 
       // Check if the password contains at least one special character
       if (!/[$@$!%*?&]/.test(text)) {
-        return setIsValidPassword(false);
+        return setIsValidNewPassword(false);
       }
 
       if (/\s/.test(text)) {
-        return setIsValidPassword(false);
+        return setIsValidNewPassword(false);
       }
 
-      return setIsValidPassword(true);
+      return setIsValidNewPassword(true);
     }
+
   };
   // const handelCheckOtp = (text) => {
   //   let isNumeric = /^[0-9]+$/;
@@ -235,33 +235,33 @@ export default function ResetPasswordScreen({ navigation }) {
                 style={tailwind.style(
                   `w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2`,
                   {
-                    border: !isValidPassword,
-                    "border-red-500": !isValidPassword,
+                    border: !isValidNewPassword,
+                    "border-red-500": !isValidNewPassword,
                   }
                 )}
               >
                 <FIcon
                   name="lock"
                   size={15}
-                  color={isValidPassword ? "gray" : "red"}
+                  color={isValidNewPassword ? "gray" : "red"}
                 />
                 <TextInput
                   placeholder="New Password"
-                  placeholderTextColor={isValidPassword ? "gray" : "red"}
+                  placeholderTextColor={isValidNewPassword ? "gray" : "red"}
                   style={
-                    !isValidPassword
+                    !isValidNewPassword
                       ? tailwind`text-xs flex-1 text-red-500`
                       : tailwind`text-xs flex-1`
                   }
                   secureTextEntry={passwordSecure}
                   value={newPassword}
-                  onChangeText={(text) => setNewPassword(text)}
+                  onChangeText={(text) => handelCheckNewPassword(text)}
                 />
                 <TouchableOpacity onPress={seePassword}>
                   <FIcon
                     name="eye"
                     size={15}
-                    color={isValidPassword ? "gray" : "red"}
+                    color={isValidNewPassword ? "gray" : "red"}
                   />
                 </TouchableOpacity>
               </View>
@@ -297,8 +297,8 @@ export default function ResetPasswordScreen({ navigation }) {
 
               <TouchableOpacity
                 disabled={
-                  email.length === 0 ||
-                  password.length === 0
+                  email == '' ||
+                  password == '' || newPassword == '' || isValidEmail === false || isValidPassword === false || isValidNewPassword === false
                 }
                 style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4`}
                 onPress={() => ChangePassword(email, password, newPassword, navigation)}

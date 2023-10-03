@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
-import React from 'react'
+import React,{useContext, useState} from 'react'
 
 // MAP
 import MapView, {Marker} from 'react-native-maps';
@@ -14,27 +14,51 @@ import Icon from 'react-native-vector-icons/AntDesign'
 // REDUX
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../context/AuthContext';
 
 export default function LocationScreen() {
+  const [address, setAddress] = useState('')
+  const [isValidAddress, setIsValidAddress] = useState(false)
   const navigation = useNavigation()
+  const {userInfo, UpdateUserData} = useContext(AuthContext)
+
+  const handelCheckAddress = (text) => {
+    setAddress(text)
+    if(text == '')
+    {
+      setIsValidAddress(false)
+    }
+    else
+    {
+            // Check if the password contains at least one special character
+            if (!/[$@$!%*?&]/.test(text)) {
+              return setIsValidAddress(false);
+            }
+
+            return setIsValidAddress(true)
+      
+    }
+    console.log(text);
+  }
+
   return (
     <SafeAreaView style={tailwind`flex-1 bg-white`}>
         <MapView
               style={tailwind`flex-1`}
               initialRegion={{
-                  latitude: 11.123145,
-                  longitude: 7.732165,
+                  latitude: userInfo.user.latitude,
+                  longitude: userInfo.user.longitude,
                   latitudeDelta: 0.01,
                   longitudeDelta: 0.01
               }} mapType='standard'>
               
               <Marker
                   coordinate={{
-                      latitude: 11.123145,
-                      longitude: 7.732165,
+                      latitude: userInfo.user.latitude,
+                      longitude: userInfo.user.longitude,
                   }}
-                  title="Ree's kitchen"
-                  description='kitchen'
+                  title={userInfo.user.address}
+                  description='Your Location'
                   pinColor='orange'
               />
         </MapView>
@@ -56,12 +80,14 @@ export default function LocationScreen() {
           <View style={tailwind`flex-row items-center justify-between mb-5`}>
               <View style={tailwind`flex-row items-center gap-3`}>
                   <Image source={require('../assets/icons/pin.png')} style={tailwind`w-5 h-5`}/>
-                  <View >
-                    <Text style={tailwind`font-bold`}>Samaru Zaria</Text>
-                    <Text style={tailwind`text-xs text-gray-500`}>Your Drlivery place</Text>
+                  <View style={tailwind``}>
+                      <Text style={tailwind`font-bold`}>{userInfo.user.location} Zaria</Text>
+                      <TextInput style={tailwind`flex-1 text-xs text-gray-500 w-55 ${isValidAddress ? 'bg-red-200' : ''}`} 
+                      placeholder={userInfo.user.address} 
+                      value={address} onChangeText={(text) => handelCheckAddress(text)}/>
                   </View>
               </View>
-              <TouchableOpacity style={tailwind`bg-[#F39300] p-3 py-2 rounded-lg`}>
+              <TouchableOpacity disabled={address == '' || isValidAddress ? true : false} style={tailwind`bg-[#F39300] p-3 py-2 rounded-lg`} onPress={() => UpdateUserData(address)}>
                   <Text style={tailwind`text-white font-bold`}>Edit</Text>
               </TouchableOpacity>
           </View>
