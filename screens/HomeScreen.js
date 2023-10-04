@@ -11,6 +11,8 @@ import DescFood from '../components/DescFood'
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setFood, selectFood } from '../slice/foodSlice';
+
+// CONTEXT
 import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 
@@ -25,13 +27,13 @@ export default function HomeScreen() {
       }, [dispatch]);
       
   return (
-    <SafeAreaView style={tailwind`flex-1 bg-white`}>
+    <SafeAreaView style={tailwind`flex-1`}>
             <View>
                   {/* HEADER START */}
-                  <View style={tailwind`flex-row items-center justify-between p-4 py-3`}>
+                  <View style={tailwind`flex-row items-center justify-between p-4 py-3 bg-white`}>
                         <View style={tailwind`flex-row items-center gap-4`}>
                               <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-lg`}>
-                                          <Image source={require('../assets/icons/bell.png')} style={tailwind`w-5 h-5`}/>
+                                          <Image source={require('../assets/icons/menu.png')} style={tailwind`w-5 h-5`}/>
                               </TouchableOpacity>
                         </View>
 
@@ -43,7 +45,7 @@ export default function HomeScreen() {
                   {/* HEADER END */}
 
                   {/* SEARCH BAR START */}
-                  <View style={tailwind`p-2 px-4 flex-row items-center justify-between`}>
+                  <View style={tailwind`p-2 px-4 flex-row items-center justify-between bg-white`}>
                         <View style={tailwind`flex-1 border border-2 border-gray-200 flex-row items-center gap-3 p-2 rounded-lg`}>
                               <Image source={require('../assets/icons/search.png')} style={tailwind`w-5 h-5`}/>
                               <TextInput placeholder='Search Food & Snacks' style={tailwind`flex-1 text-xs text-gray-600`}/>
@@ -63,7 +65,7 @@ export default function HomeScreen() {
                               paddingBottom: 50
                }}>
                   {/* ADVERT START */}
-                  <View style={tailwind`w-full  overflow-hidden`}>
+                  <View style={tailwind`w-full overflow-hidden`}>
                         <View style={tailwind`w-[90%] mx-auto rounded-lg overflow-hidden`}>
                               <Image source={require('../assets/h5-bg-countdown1.jpg')} style={tailwind` absolute w-full h-full`}/>
                               <View style={tailwind`my-auto py-4 px-7`}>

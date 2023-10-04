@@ -1,21 +1,21 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-
-import FIcon from "react-native-vector-icons/Feather";
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
-import { profile } from "../constant";
-import tailwind from "twrnc";
-import { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext'
-
-// ICON
-
-// TAILWIND
-
-// NAVIGATION
 
 // DATA
+import { profile } from "../constant";
+
+// ICON
+import FIcon from "react-native-vector-icons/Feather";
+
+// TAILWIND
+import tailwind from "twrnc";
+
+// NAVIGATION
+import { useNavigation } from "@react-navigation/native";
+
+// CONTEXT
+import { AuthContext } from '../context/AuthContext'
 
 const ListItem = ({ title, text, children }) => {
   return (

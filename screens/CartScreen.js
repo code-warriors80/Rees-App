@@ -1,4 +1,4 @@
-import { View, Text , TouchableOpacity, ScrollView, Image} from 'react-native'
+import { View, Text , TouchableOpacity, ScrollView, Image, Modal} from 'react-native'
 import React, {useEffect, useState, useContext} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart, selectCartItem, selectCartTotal } from '../slice/cartSlice'
 import { AuthContext } from '../context/AuthContext'
+import Checkout from '../components/Checkout'
 
 
 export default function CartScreen() {
@@ -25,6 +26,7 @@ export default function CartScreen() {
   const cartItems = useSelector(selectCartItem)
   const cartTotal = useSelector(selectCartTotal)
   const [groupitems, setGroupItems] = useState({})
+  const [model, setModel] = useState(false)
 
   let delivery = 0
 
@@ -62,6 +64,10 @@ export default function CartScreen() {
 
   return (
     <SafeAreaView style={tailwind`px-5 py-3 flex-1 bg-white`}>
+      
+        <Modal visible={model} animationType='slide'>
+          <Checkout setModel={setModel} delivery={delivery}/>
+        </Modal>
         {/* HEADER START */}
         <View style={tailwind`flex-row items-center justify-between pb-3`}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
@@ -139,7 +145,7 @@ export default function CartScreen() {
       </View>
       {/* CART TOTAL END */}
 
-        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => navigation.navigate('Checkout')}>
+        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => setModel(true)}>
           <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Confirm Order</Text>
         </TouchableOpacity>
     </SafeAreaView>

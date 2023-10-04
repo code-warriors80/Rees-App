@@ -14,6 +14,8 @@ import Icon from 'react-native-vector-icons/AntDesign'
 // REDUX
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+
+// CONTEXT
 import { AuthContext } from '../context/AuthContext';
 
 export default function LocationScreen() {

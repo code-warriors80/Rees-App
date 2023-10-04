@@ -1,9 +1,17 @@
 import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
 import React, {useState, useContext} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
+// TAILWIND
 import tailwind from 'twrnc'
+
+// ICON
 import FIcon from 'react-native-vector-icons/Feather'
+
+// NAVIGATION
 import { useNavigation } from '@react-navigation/native'
+
+// CONTEXT
 import { AuthContext } from '../context/AuthContext'
 
 export default function LoginScreen() {

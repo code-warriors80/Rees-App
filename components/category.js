@@ -13,7 +13,7 @@ export default function Category() {
     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tailwind`my-5`}>
       {categories.map((items, index) => {
               let isActive = items.id == activeCategory;
-              let btnClass = isActive ? 'bg-gray-200 p-2 rounded-lg' : 'bg-white';
+              let btnClass = isActive ? 'bg-white p-2 rounded-lg' : 'bg-gray-200';
               let textClass = isActive ? 'font-bold text-gray-800' : 'font-semibold text-gray-500'
               return (
                 <TouchableOpacity key={index} style={tailwind`p-2 px-3 mr-3 rounded-lg`} onPress={() => setActiveCategory(items.id)}>

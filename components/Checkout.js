@@ -17,36 +17,17 @@ import { useSelector } from 'react-redux';
 import { selectCartItem, selectCartTotal } from '../slice/cartSlice';
 import { AuthContext } from '../context/AuthContext';
 
-export default function CheckoutScreen() {
+export default function CheckoutScreen({setModel, delivery}) {
   const {userInfo} = useContext(AuthContext)
   const navigation = useNavigation()
   const cartItems = useSelector(selectCartItem)
   const cartTotal = useSelector(selectCartTotal)
 
-  let delivery = 0
-
-  switch(userInfo.user.location)
-  {
-    case 'Samaru':
-      delivery = 400
-      break;
-    case 'Sabon Gari':
-      delivery = 100
-      break;
-    case 'Kongo':
-      delivery = 250
-      break;
-    case 'PZ':
-      delivery = 150
-      break;
-    default:
-      delivery
-  }
   return (
     <SafeAreaView style={tailwind`px-7 py-3 flex-1 bg-white`}>
         {/* HEADER START */}
         <View style={tailwind`flex-row items-center justify-between pt-3 pb-5`}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
+            <TouchableOpacity onPress={() => setModel(false)} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
               <FIcon name='arrow-left' size={20} color='black'/>
             </TouchableOpacity>
 

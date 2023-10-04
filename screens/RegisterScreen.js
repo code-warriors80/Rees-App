@@ -1,11 +1,18 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
 import React, {useContext, useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
+// TAILWIND
 import tailwind from 'twrnc'
+
+// ICON
 import FIcon from 'react-native-vector-icons/Feather'
+
+// MAVIGATION
 import { useNavigation } from '@react-navigation/native'
+
+// CONTEXT
 import { AuthContext } from '../context/AuthContext'
-import { Image } from 'react-native'
 
 export default function RegisterScreen() {
     const {register} = useContext(AuthContext)

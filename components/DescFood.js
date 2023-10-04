@@ -34,6 +34,7 @@ export default function DescFood({food}) {
                                     </View>
                                     
                                     <View style={tailwind`flex-row items-center justify-center gap-1`}>
+                                          
                                           <Image source={require('../assets/icons/star.png')} style={tailwind`w-3 h-3`}/>
                                           <Image source={require('../assets/icons/star.png')} style={tailwind`w-3 h-3`}/>
                                           <Image source={require('../assets/icons/star.png')} style={tailwind`w-3 h-3`}/>

@@ -5,14 +5,19 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  TextInput
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-
-import FIcon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput } from "react-native-gesture-handler";
+
+// ICON
+import FIcon from "react-native-vector-icons/Feather";
+
+// TAILWIND
 import tailwind from "twrnc";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
+
+// CONTEXT
 import { AuthContext } from "../context/AuthContext";
 
 export default function ResetPasswordScreen({ navigation }) {

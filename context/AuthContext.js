@@ -1,8 +1,15 @@
-import React, { createContext, useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BASE_URL } from "../constant/config";
-import axios from "axios";
 import { Alert } from "react-native";
+import React, { createContext, useEffect, useState } from "react";
+
+// SAFESTORAGE
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+// API LINK
+import { BASE_URL } from "../constant/config";
+
+// AXIOS
+import axios from "axios";
+
 
 export const AuthContext = createContext();
 
@@ -15,7 +22,7 @@ export const AuthProvider = ({children}) => {
 
     // This is your register script
     const register = async (username, email, mobile, password, navigation) => {
-            axios.post(`${BASE_URL}/register`, {
+            const response = axios.post(`${BASE_URL}/register`, {
                 username,
                 email,
                 mobile,
