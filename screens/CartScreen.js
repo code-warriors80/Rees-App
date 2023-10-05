@@ -48,6 +48,8 @@ export default function CartScreen() {
       delivery
   }
 
+  let sumTotal = cartTotal + delivery
+
   useEffect(() => {
     const items = cartItems.reduce((group, item) => {
       if(group[item.id]){
@@ -64,10 +66,6 @@ export default function CartScreen() {
 
   return (
     <SafeAreaView style={tailwind`px-5 py-3 flex-1 bg-white`}>
-      
-        <Modal visible={model} animationType='slide'>
-          <Checkout setModel={setModel} delivery={delivery}/>
-        </Modal>
         {/* HEADER START */}
         <View style={tailwind`flex-row items-center justify-between pb-3`}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
@@ -140,10 +138,14 @@ export default function CartScreen() {
 
           <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
               <Text style={tailwind`font-bold text-[16px]`}>Total</Text>
-              <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {(cartTotal + delivery).toLocaleString('en-US')}</Text>
+              <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/> {sumTotal.toLocaleString('en-US')}</Text>
           </View>
       </View>
       {/* CART TOTAL END */}
+
+      <Modal visible={model} animationType='slide'>
+          <Checkout setModel={setModel} delivery={delivery} sumTotal={sumTotal}/>
+        </Modal>
 
         <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => setModel(true)}>
           <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Confirm Order</Text>

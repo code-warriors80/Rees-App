@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, Text, TouchableOpacity, ScrollView, Image, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 // ICON
@@ -13,15 +13,20 @@ import tailwind from 'twrnc';
 import {useContext} from 'react'
 
 // REDUX
-import { useSelector } from 'react-redux';
-import { selectCartItem, selectCartTotal } from '../slice/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItemIds, emptyCart } from '../slice/cartSlice';
 import { AuthContext } from '../context/AuthContext';
 
-export default function CheckoutScreen({setModel, delivery}) {
-  const {userInfo} = useContext(AuthContext)
+export default function CheckoutScreen({setModel, delivery, sumTotal}) {
+  const {userInfo, Order} = useContext(AuthContext)
   const navigation = useNavigation()
-  const cartItems = useSelector(selectCartItem)
-  const cartTotal = useSelector(selectCartTotal)
+  const cartItemsById = useSelector(selectCartItemIds)
+
+  const dispatch = useDispatch()
+
+  const cartEmpty = () => {
+    dispatch(emptyCart())
+  }
 
   return (
     <SafeAreaView style={tailwind`px-7 py-3 flex-1 bg-white`}>
@@ -102,12 +107,12 @@ export default function CheckoutScreen({setModel, delivery}) {
 
             <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
                 <Text style={tailwind`font-bold text-[16px]`}>Total</Text>
-                <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{(delivery + cartTotal).toLocaleString('en-US')}</Text>
+                <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{sumTotal.toLocaleString('en-US')}</Text>
             </View>
         </View>
         {/* ORDER TOTAL START */}
 
-        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => navigation.navigate()}>
+        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => Order(sumTotal, cartItemsById, cartEmpty)}>
           <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Pay Now</Text>
         </TouchableOpacity>
     </SafeAreaView>

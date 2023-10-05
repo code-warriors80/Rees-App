@@ -38,6 +38,8 @@ export const selectCartItem = state=>state.cart.items
 
 export const selectCartItemById = (state, id)=>state.cart.items.filter(item=> item.id == id)
 
+export const selectCartItemIds = (state) => state.cart.items.map(item => item.id);
+
 export const selectCartTotal = state=>state.cart.items.reduce((total, item)=> total=total+item.price, 0)
 
 export default cartSlice.reducer

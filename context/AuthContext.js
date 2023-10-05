@@ -22,7 +22,7 @@ export const AuthProvider = ({children}) => {
 
     // This is your register script
     const register = async (username, email, mobile, password, navigation) => {
-            const response = axios.post(`${BASE_URL}/register`, {
+            const response = axios.post(`${BASE_URL}users/register`, {
                 username,
                 email,
                 mobile,
@@ -47,7 +47,7 @@ export const AuthProvider = ({children}) => {
 
     // This is your login script
     const login = async (email, password) => {
-        const response = axios.post(`${BASE_URL}/login`, {
+        const response = axios.post(`${BASE_URL}users/login`, {
             email,
             password,
         })
@@ -85,7 +85,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const ChangePassword = (email, password, newPassword, navigation) => {
-        axios.put(`${BASE_URL}/updatepassword`, {
+        axios.put(`${BASE_URL}users/updatepassword`, {
             email,
             password,
             newPassword
@@ -102,7 +102,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const UpdateUserData = (address) => {
-        axios.put(`${BASE_URL}/updateuser/${userInfo.user._id}`, {
+        axios.put(`${BASE_URL}users/updateuser/${userInfo.user._id}`, {
             address
         }).then(response => {
             //   console.log('Registration successful', response.data);
@@ -138,12 +138,53 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const Order = async (sumTotal, cartItemsById, cartEmpty) => {
+        try {
+            const products = [];
+        
+            // Iterate through cartItemsById to create products array with quantities
+            cartItemsById.forEach(itemId => {
+              const existingProductIndex = products.findIndex(product => product.product === itemId);
+        
+              if (existingProductIndex !== -1) {
+                // If the product exists, increment the quantity
+                products[existingProductIndex].quantity += 1;
+              } else {
+                // If the product doesn't exist, add it to the products array
+                products.push({
+                  product: itemId,
+                  quantity: 1
+                });
+              }
+            });
+        
+            const response = await axios.post(`${BASE_URL}order/createorders`, {
+              customer: userInfo.user._id,
+              products: products,
+              totalAmount: sumTotal,
+              address: userInfo.user.address
+            });
+        
+            if (response) {
+              Alert.alert('Order Created');
+              console.log(response.data);
+              cartEmpty()
+            } else {
+              console.log('Error Creating Order');
+            }
+        
+            console.log('Order created:');
+          } catch (error) {
+            console.error('Error creating order:', error);
+          }
+        };
+
+
     useEffect(() => {
         isLoggedIn()
     }, [])
-
     return(
-        <AuthContext.Provider value={{login, logout,  register, ChangePassword, UpdateUserData, userInfo, autherror, isLoading, userToken}}>
+        <AuthContext.Provider value={{login, logout,  register, ChangePassword, UpdateUserData, Order ,userInfo, autherror, isLoading, userToken}}>
             {children}
         </AuthContext.Provider>
     )

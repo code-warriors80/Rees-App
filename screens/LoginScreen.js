@@ -16,7 +16,7 @@ import { AuthContext } from '../context/AuthContext'
 
 export default function LoginScreen() {
   // context value is passed on the login button
-  const { login, autherror } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigation = useNavigation();
   const [passwordSecure, setPasswordSecure] = useState(true);
   const [email, setEmail] = useState("");
