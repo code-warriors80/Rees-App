@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { tailwind_classes } from '../styles/styles'
 
 // ICON
 import FIcon from 'react-native-vector-icons/Feather'
@@ -17,11 +18,11 @@ import { about } from '../constant'
 export default function AboutScreen() {
   const navigation = useNavigation()
   return (
-    <SafeAreaView style={tailwind`flex-1 bg-white p-5`}>
+    <SafeAreaView style={tailwind`${tailwind_classes[1].safe_area}`}>
         {/* HEADER START */}
-        <View style={tailwind`flex-row items-center justify-between pb-3`}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
-              <FIcon name='arrow-left' size={20} color='black'/>
+        <View style={tailwind`${tailwind_classes[2].header_vw}`}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`${tailwind_classes[2].header_lft_btn}`}>
+              <FIcon name='arrow-left' size={17} color='black'/>
             </TouchableOpacity>
 
             <Text style={tailwind`text-[16px] font-bold mx-auto`}>About Our Kitchen</Text>

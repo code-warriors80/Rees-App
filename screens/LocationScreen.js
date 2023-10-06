@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
 import React,{useContext, useState} from 'react'
+import { tailwind_classes } from '../styles/styles';
 
 // MAP
 import MapView, {Marker} from 'react-native-maps';
@@ -44,9 +45,18 @@ export default function LocationScreen() {
   }
 
   return (
-    <SafeAreaView style={tailwind`flex-1 bg-white`}>
+    <SafeAreaView style={tailwind`${tailwind_classes[1].safe_area}`}>
+        {/* HEADER START */}
+        <View style={tailwind`${tailwind_classes[2].header_vw}`}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`${tailwind_classes[2].header_lft_btn}`}>
+              <FIcon name='arrow-left' size={17} color='black'/>
+            </TouchableOpacity>
+
+            <Text style={tailwind`${tailwind_classes[2].header_txt}`}>My Location</Text>
+        </View>
+        {/* HEADER END */}
         <MapView
-              style={tailwind`flex-1`}
+              style={tailwind`${tailwind_classes[1].safe_area}`}
               initialRegion={{
                   latitude: userInfo.user.latitude,
                   longitude: userInfo.user.longitude,
@@ -64,18 +74,6 @@ export default function LocationScreen() {
                   pinColor='orange'
               />
         </MapView>
-
-        {/* HEADER START */}
-        <View style={tailwind`absolute flex-row items-center justify-between top-6 gap-5 py-4 px-5 `}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
-              <FIcon name='arrow-left' size={20} color='black'/>
-            </TouchableOpacity>
-
-            <View style={tailwind`flex-1 bg-white p-2 px-3 rounded-lg shadow`}>
-                <TextInput placeholder='Search....'/>
-            </View>
-        </View>
-        {/* HEADER END */}
 
       <View style={tailwind`p-5 px-6`}>
         <View >

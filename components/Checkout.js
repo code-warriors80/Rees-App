@@ -16,6 +16,7 @@ import {useContext} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItemIds, emptyCart } from '../slice/cartSlice';
 import { AuthContext } from '../context/AuthContext';
+import { tailwind_classes } from '../styles/styles'
 
 export default function CheckoutScreen({setModel, delivery, sumTotal}) {
   const {userInfo, Order} = useContext(AuthContext)
@@ -29,22 +30,22 @@ export default function CheckoutScreen({setModel, delivery, sumTotal}) {
   }
 
   return (
-    <SafeAreaView style={tailwind`px-7 py-3 flex-1 bg-white`}>
+    <SafeAreaView style={tailwind`${tailwind_classes[1].safe_area}`}>
         {/* HEADER START */}
-        <View style={tailwind`flex-row items-center justify-between pt-3 pb-5`}>
-            <TouchableOpacity onPress={() => setModel(false)} style={tailwind`bg-white p-2 rounded-full shadow-lg`}>
-              <FIcon name='arrow-left' size={20} color='black'/>
+        <View style={tailwind`${tailwind_classes[2].header_vw}`}>
+            <TouchableOpacity onPress={() => setModel(false)} style={tailwind`${tailwind_classes[2].header_lft_btn}`}>
+              <FIcon name='arrow-left' size={17} color='black'/>
             </TouchableOpacity>
 
-            <Text style={tailwind`text-[16px] font-bold mx-auto`}>Checkout</Text>
+            <Text style={tailwind`${tailwind_classes[2].header_txt}`}>Checkout</Text>
         </View>
         {/* HEADER END */}
 
-        <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
+        <ScrollView style={tailwind`${tailwind_classes[1].safe_area}`} showsVerticalScrollIndicator={false}>
               {/* ORDER ADDRESS */}
-              <View style={tailwind`m-1`}>
-                    <Text style={tailwind`font-bold mb-4`}>Deivery Address</Text>
-                    <TouchableOpacity style={tailwind`flex-row items-center justify-between w-full bg-[#F39300] rounded-lg p-3 shadow-lg`} onPress={() => navigation.navigate('Location')}>
+              <View style={tailwind`${tailwind_classes[4].chckout_vs}`}>
+                    <Text style={tailwind`${tailwind_classes[4].chckout_txt}`}>Deivery Address</Text>
+                    <TouchableOpacity style={tailwind`${tailwind_classes[4].item_vw} ${tailwind_classes[4].item_tch} ${tailwind_classes[1].bg_col}`} onPress={() => navigation.navigate('Location')}>
                         <View style={tailwind`flex-row items-center gap-3`}>
                               <Image source={require('../assets/3d-view-map.jpg')} style={tailwind`w-15 h-15 rounded-lg`}/>
                               <View style={tailwind`w-[68%]`}>
@@ -54,42 +55,40 @@ export default function CheckoutScreen({setModel, delivery, sumTotal}) {
                         </View>
                         <FIcon name='chevron-right' size={15} color='white'/>
                     </TouchableOpacity>
-              </View>
               {/* ORDER ADDRESS */}
 
               {/* PAYMENT METHODS */}
-              <View>
-                  <View style={tailwind`flex-row items-center justify-between mt-8`}>
-                      <Text style={tailwind`font-bold`}>Payment Method</Text>
+                  <View style={tailwind`${tailwind_classes[4].items_txt_vw}`}>
+                      <Text style={tailwind`${tailwind_classes[4].chckout_txt}`}>Payment Method</Text>
                       <TouchableOpacity>
-                        <Text style={tailwind`text-[#F39300] text-xs`}>Add New</Text>
+                        <Text style={tailwind`${tailwind_classes[4].items_vw_txt}`}>Add New</Text>
                       </TouchableOpacity>
                   </View>
 
                   <View>
-                      <TouchableOpacity style={tailwind`bg-white rounded-lg shadow mx-1 my-2 p-4`}>
-                        <View style={tailwind`flex-row items-center gap-3`}>
+                      <TouchableOpacity style={tailwind`${tailwind_classes[4].item_tch}`}>
+                        <View style={tailwind`${tailwind_classes[4].item_vw}`}>
                             <Image source={require("../assets/logos/master.png")} style={tailwind`w-10 h-10`}/>
-                            <View style={tailwind``}>
-                              <Text style={tailwind`text-sm font-bold`}>Pay with credit card</Text>
+                            <View>
+                              <Text style={tailwind`${tailwind_classes[4].item_txt}`}>Pay with credit card</Text>
                             </View>
                         </View>
                       </TouchableOpacity>
 
-                      <TouchableOpacity style={tailwind`bg-white rounded-lg shadow mx-1 my-2 p-4`}>
-                        <View style={tailwind`flex-row items-center gap-3`}>
+                      <TouchableOpacity style={tailwind`${tailwind_classes[4].item_tch}`}>
+                        <View style={tailwind`${tailwind_classes[4].item_vw}`}>
                             <Image source={require("../assets/logos/ussd.png")} style={tailwind`w-10 h-10`}/>
-                            <View style={tailwind``}>
-                              <Text style={tailwind`text-sm font-bold`}>Pay via USSD code</Text>
+                            <View>
+                              <Text style={tailwind`${tailwind_classes[4].item_txt}`}>Pay via USSD code</Text>
                             </View>
                         </View>
                       </TouchableOpacity>
 
-                      <TouchableOpacity style={tailwind`bg-white rounded-lg shadow mx-1 my-2 p-4`}>
-                        <View style={tailwind`flex-row items-center gap-3`}>
+                      <TouchableOpacity style={tailwind`${tailwind_classes[4].item_tch}`}>
+                        <View style={tailwind`${tailwind_classes[4].item_vw}`}>
                           <Image source={require("../assets/logos/bank.png")} style={tailwind`w-9 h-9`}/>
-                            <View style={tailwind``}>
-                              <Text style={tailwind`text-sm font-bold`}>Local Bank-transfer</Text>
+                            <View>
+                              <Text style={tailwind`${tailwind_classes[4].item_txt}`}>Local Bank-transfer</Text>
                             </View>
                         </View>
                       </TouchableOpacity>
@@ -99,22 +98,24 @@ export default function CheckoutScreen({setModel, delivery, sumTotal}) {
         </ScrollView>
 
         {/* ORDER TOTAL START */}
-        <View style={tailwind`bg-white shadow-sm rounded-lg`}>
-            <View style={tailwind`flex-row items-center justify-between py-3 border-t-[1px] border-b-[1px] border-gray-200 px-5`}>
-                <Text style={tailwind`font-semibold text-[12px]`}>Delivery</Text>
-                <Text style={tailwind`font-semibold text-xs`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{delivery.toLocaleString('en-US')}</Text>
-            </View>
+        <View style={tailwind`${tailwind_classes[3].cart_tot_con}`}>
+            <View style={tailwind`${tailwind_classes[3].cart_tot_vw}`}>
+                <View style={tailwind`${tailwind_classes[3].tot_view}`}>
+                    <Text style={tailwind`${tailwind_classes[3].tot_vw_txt1}`}>Delivery</Text>
+                    <Text style={tailwind`${tailwind_classes[3].tot_num_1}`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{delivery.toLocaleString('en-US')}</Text>
+                </View>
 
-            <View style={tailwind`flex-row items-center justify-between py-3 px-5`}>
-                <Text style={tailwind`font-bold text-[16px]`}>Total</Text>
-                <Text style={tailwind`font-bold text-[14px] text-[#F39300]`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{sumTotal.toLocaleString('en-US')}</Text>
+                <View style={tailwind`${tailwind_classes[3].tot_view}`}>
+                    <Text style={tailwind`${tailwind_classes[3].tot_vw_txt2}`}>Total</Text>
+                    <Text style={tailwind`${tailwind_classes[3].tot_num_2}`}><Image source={require('../assets/icons/naira.png')} style={tailwind`w-3 h-3`}/>{sumTotal.toLocaleString('en-US')}</Text>
+                </View>
             </View>
+            {/* ORDER TOTAL START */}
+
+            <TouchableOpacity style={tailwind`${tailwind_classes[3].tot_btn}`} onPress={() => Order(sumTotal, cartItemsById, cartEmpty)}>
+              <Text style={tailwind`${tailwind_classes[3].tot_btn_txt}`}>Pay Now</Text>
+            </TouchableOpacity>
         </View>
-        {/* ORDER TOTAL START */}
-
-        <TouchableOpacity style={tailwind`bg-[#F39300] py-4 rounded-lg mt-5`} onPress={() => Order(sumTotal, cartItemsById, cartEmpty)}>
-          <Text style={tailwind`text-center text-[15px] text-white font-bold`}>Pay Now</Text>
-        </TouchableOpacity>
     </SafeAreaView>
   )
 }

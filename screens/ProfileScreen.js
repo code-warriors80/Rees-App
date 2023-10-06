@@ -1,6 +1,7 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { tailwind_classes } from '../styles/styles'
 
 // DATA
 import { profile } from "../constant";
@@ -19,10 +20,10 @@ import { AuthContext } from '../context/AuthContext'
 
 const ListItem = ({ title, text, children }) => {
   return (
-    <View style={tailwind`pb-3`}>
-      <Text style={tailwind`text-sm font-medium text-gray-400`}>{title}</Text>
+    <View style={tailwind`pb-3 ${tailwind_classes[5].flex_item}`}>
+      <Text style={tailwind`text-sm font-bold`}>{title}</Text>
       {text && (
-        <Text style={tailwind`text-base font-semibold mt-1`}>{text}</Text>
+        <Text style={tailwind`text-xs font-light text-gray-400`}>{text}</Text>
       )}
       {children}
     </View>
@@ -32,8 +33,8 @@ const ListItem = ({ title, text, children }) => {
 const ListLinkItem = ({ title, icon, link }) => {
   return (
     <TouchableOpacity
-      style={tailwind`flex flex-row items-center justify-between py-2`} onPress={link}>
-      <Text style={tailwind`text-base font-semibold`}>{title}</Text>
+      style={tailwind`${tailwind_classes[5].flex_item} py-2`} onPress={link}>
+      <Text style={tailwind`text-sm font-bold`}>{title}</Text>
 
       <FIcon name={icon || "chevrons-right"} size={20} color="black" />
     </TouchableOpacity>
@@ -44,17 +45,15 @@ export default function ProfileScreen() {
   const {userInfo, logout} = useContext(AuthContext)
   const navigation = useNavigation()
   return (
-    <SafeAreaView style={tailwind`flex-1 bg-white p-5`}>
+    <SafeAreaView style={tailwind`${tailwind_classes[1].safe_area}`}>
       {/* HEADER START */}
-      <View style={tailwind`flex-row items-center justify-between pb-3`}>
+      <View style={tailwind`${tailwind_classes[2].header_vw}`}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={tailwind`bg-white p-2 rounded-full shadow-lg`}
+          style={tailwind`${tailwind_classes[2].header_lft_btn}`}
         >
-          <FIcon name="arrow-left" size={20} color="black" />
+          <FIcon name="arrow-left" size={17} color="black" />
         </TouchableOpacity>
-
-        {/* <Text style={tailwind`text-[16px] font-bold mx-auto`}>Profile</Text> */}
       </View>
       {/* HEADER END */}
 
@@ -63,7 +62,7 @@ export default function ProfileScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <Image source={profile.image} style={tailwind`w-40 h-40 mx-auto rounded-full`} />
-          <Text style={tailwind`text-center text-lg font-bold`}>
+          <Text style={tailwind`text-center text-lg font-bold my-5`}>
             Account Details
           </Text>
 
@@ -73,7 +72,7 @@ export default function ProfileScreen() {
         </View>
 
         <View
-          style={tailwind`bg-white rounded-lg mt-8 pb-4 border-b border-zinc-200`}
+          style={tailwind`p-5 ${tailwind_classes[5].page_vw, tailwind_classes[5].bord}`}
         >
           <ListItem title="Username" text={userInfo.user.username} />
           <ListItem title="Email" text={userInfo.user.email} />
@@ -91,7 +90,7 @@ export default function ProfileScreen() {
           </ListItem>
         </View>
 
-        <View style={tailwind`bg-white rounded-lg mt-5 pb-4`}>
+        <View style={tailwind`${tailwind_classes[5].page_vw}`}>
           <ListLinkItem title="Payments" />
           <ListLinkItem title="Settings" />
           <ListLinkItem title="Password & security" link={() => navigation.navigate('Password-Reset')}/>

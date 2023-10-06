@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
 import React, {useContext, useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import {tailwind_classes} from '../styles/styles'
 
 // TAILWIND
 import tailwind from 'twrnc'
@@ -148,56 +149,52 @@ export default function RegisterScreen() {
   return (
     <SafeAreaView style={tailwind`flex-1`}>
         <View style={tailwind`flex-row py-3`}>
-            <Image source={require('../assets/logo.png')} style={tailwind`w-70 h-50 mx-auto`}/>
+            <Image source={require('../assets/logo.png')} style={tailwind`${tailwind_classes[0].frm_img}`}/>
         </View>
-        <View style={tailwind`flex-1 bg-white rounded-t-[50px] shadow-2xl`}>
+        <View style={tailwind`${tailwind_classes[0].frm_box}`}>
             <View style={tailwind`w-full`}>
                 <View style={tailwind`w-[90%] my-3 mx-auto`}>
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidUsername ? 'border border-red-500' : ''}`}>
+                        <View style={tailwind`${tailwind_classes[0].frm_view} ${checkValidUsername ? `${tailwind_classes[0].frm_viewerr}` : ''}`}>
                             <FIcon name='user' size={15} color={checkValidUsername ? 'red' : 'gray'}/>
-                            <TextInput placeholder='Username' style={tailwind`text-xs flex-1 ${checkValidUsername ? 'text-red-500' : 'text-gray-400'}`} value={username} onChangeText={(text) => handelCheckUsername(text)}/>
+                            <TextInput placeholder='Username' style={tailwind`${tailwind_classes[0].frm_input} ${checkValidUsername ? `${tailwind_classes[0].frm_input_err}` : ''}`} value={username} onChangeText={(text) => handelCheckUsername(text)}/>
                         </View>
 
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidEmail ? 'border border-red-500' : ''}`}>
+                        <View style={tailwind`${tailwind_classes[0].frm_view} ${checkValidEmail ? `${tailwind_classes[0].frm_viewerr}` : ''}`}>
                             <FIcon name='mail' size={15} color={checkValidEmail ? 'red' : 'gray'}/>
-                            <TextInput placeholder='Email' style={tailwind`text-xs flex-1 ${checkValidEmail ? 'text-red-500' : 'text-gray-400'}`} value={email} onChangeText={text => handelCheckEmail(text)}/>
+                            <TextInput placeholder='Email' style={tailwind`${tailwind_classes[0].frm_input} ${checkValidEmail ? `${tailwind_classes[0].frm_input_err}` : ''}`} value={email} onChangeText={text => handelCheckEmail(text)}/>
                         </View>
 
 
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidMobile ? 'border border-red-500' : ''}`}>
+                        <View style={tailwind`${tailwind_classes[0].frm_view} ${checkValidMobile ? `${tailwind_classes[0].frm_viewerr}` : ''}`}>
                             <FIcon name='phone' size={15} color={checkValidMobile ? 'red' : 'gray'}/>
-                            <TextInput placeholder='Mobile' style={tailwind`text-xs flex-1 ${checkValidMobile ? 'text-red-500' : 'text-gray-400'}`} keyboardType='numeric' value={mobile} onChangeText={(text) => handelCheckMobile(text)}/>
+                            <TextInput placeholder='Mobile' style={tailwind`${tailwind_classes[0].frm_input} ${checkValidMobile ? `${tailwind_classes[0].frm_input_err}` : ''}`} keyboardType='numeric' value={mobile} onChangeText={(text) => handelCheckMobile(text)}/>
                         </View>
 
 
-                        <View style={tailwind`w-[90%] p-3 px-5 bg-white mx-auto rounded-full shadow my-2 flex-row items-center gap-2 ${checkValidPassword ? ' border border-red-500' : ''}`}>
+                        <View style={tailwind`${tailwind_classes[0].frm_view} ${checkValidPassword ? `${tailwind_classes[0].frm_viewerr}` : ''}`}>
                             <FIcon name='lock' size={15} color={checkValidPassword ? 'red' : 'gray'}/>
-                            <TextInput placeholder='Password' style={tailwind`text-xs flex-1 ${checkValidPassword ? 'text-red-500' : 'text-gray-400'}`} secureTextEntry={passwordSecure} value={password} onChangeText={(text) => handelCheckPassword(text)}/>
+                            <TextInput placeholder='Password' style={tailwind`${tailwind_classes[0].frm_input} ${checkValidPassword ? `${tailwind_classes[0].frm_input_err}` : ''}`} secureTextEntry={passwordSecure} value={password} onChangeText={(text) => handelCheckPassword(text)}/>
                             <TouchableOpacity onPress={seePassword}>
                                 <FIcon name='eye' size={15} color={checkValidPassword ? 'red' : 'gray'}/>
                             </TouchableOpacity>
                         </View>
 
 
-                    <TouchableOpacity style={tailwind`my-2`}>
-                        <Text style={tailwind`text-right text-gray-500 text-xs mr-8`}>Forgot your password?</Text>
-                    </TouchableOpacity>
-
                     <TouchableOpacity disabled={username == '' || email == '' || mobile == '' 
                         || password == '' || setCheckValidUsername == true || setCheckValidEmail == true 
                         || setCheckValidMobile == true || setCheckValidPassword == true ? true : false} 
-                        style={tailwind`w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-1 py-4`} 
+                        style={tailwind`${tailwind_classes[0].frm_buttons}`} 
                         onPress={() => register(username, email, mobile, password, navigation)}>
 
-                        <Text style={tailwind`text-center text-white font-bold`}>Create Account</Text>
+                        <Text style={tailwind`${tailwind_classes[0].frm_buttons_txt}`}>Create Account</Text>
                     </TouchableOpacity>
 
                     <View>
 
-                        <View style={tailwind`flex-row items-center justify-center gap-1 mt-4`}>
-                            <Text style={tailwind`text-center text-gray-500 text-xs`}>Aleady Have An Account</Text>
+                        <View style={tailwind`${tailwind_classes[0].frm_nav}`}>
+                            <Text style={tailwind`${tailwind_classes[0].frm_txt_2}`}>Aleady Have An Account</Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                                <Text style={tailwind`text-xs text-[#F39300]`}>Login</Text>
+                                <Text style={tailwind`${tailwind_classes[0].frm_nav_txt}`}>Login</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

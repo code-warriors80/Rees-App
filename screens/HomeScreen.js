@@ -15,6 +15,7 @@ import { setFood, selectFood } from '../slice/foodSlice';
 // CONTEXT
 import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
+import { tailwind_classes } from '../styles/styles'
 
 export default function HomeScreen() {
       const {userInfo} = useContext(AuthContext)
@@ -27,17 +28,17 @@ export default function HomeScreen() {
       }, [dispatch]);
       
   return (
-    <SafeAreaView style={tailwind`flex-1`}>
+    <SafeAreaView style={tailwind`${tailwind_classes[1].safe_area}`}>
             <View>
                   {/* HEADER START */}
-                  <View style={tailwind`flex-row items-center justify-between p-4 py-3 bg-white`}>
+                  <View style={tailwind`${tailwind_classes[2].header_vw}`}>
                         <View style={tailwind`flex-row items-center gap-4`}>
-                              <TouchableOpacity style={tailwind`bg-gray-200 p-2 rounded-lg`}>
-                                          <Image source={require('../assets/icons/menu.png')} style={tailwind`w-5 h-5`}/>
+                              <TouchableOpacity style={tailwind`${tailwind_classes[2].header_lft_btn}`}>
+                                          <Image source={require('../assets/icons/menu.png')} style={tailwind`${tailwind_classes[2].header_lft_img}`}/>
                               </TouchableOpacity>
                         </View>
 
-                        <View style={tailwind`flex-row items-center gap-2`}>
+                        <View style={tailwind`${tailwind_classes[2].header_pro}`}>
                         <Text style={tailwind`font-bold text-black`}>{userInfo.user.username}</Text>
                               <Image source={require('../assets/user/male.jpg')} style={tailwind`w-10 h-10 rounded-full`}/>
                         </View>
@@ -66,7 +67,7 @@ export default function HomeScreen() {
                }}>
                   {/* ADVERT START */}
                   <View style={tailwind`w-full overflow-hidden`}>
-                        <View style={tailwind`w-[90%] mx-auto rounded-lg overflow-hidden`}>
+                        <View style={tailwind`${tailwind_classes[2].page} rounded-lg overflow-hidden`}>
                               <Image source={require('../assets/h5-bg-countdown1.jpg')} style={tailwind` absolute w-full h-full`}/>
                               <View style={tailwind`my-auto py-4 px-7`}>
                                     <Text style={tailwind`text-white font-bold text-xs`}>Get Special Discount</Text>
@@ -80,10 +81,10 @@ export default function HomeScreen() {
                   {/* ADVERT END */}
 
                   {/* CATEGORY START */}
-                  <View style={tailwind`p-5 flex-1`}>
-                      <View style={tailwind`flex-row justify-between items-center`}>
-                            <Text style={tailwind`font-bold`}>Food Items</Text>
-                            <Text style={tailwind`text-[#F39300] font-light text-xs`}>View All</Text>
+                  <View style={tailwind`p-5 ${tailwind_classes[1].safe_area}`}>
+                      <View style={tailwind`${tailwind_classes[4].items_txt_vw}`}>
+                            <Text style={tailwind`${tailwind_classes[4].item_txt}`}>Food Items</Text>
+                            <Text style={tailwind`${tailwind_classes[4].items_vw_txt}`}>View All</Text>
                       </View>
 
                         <Category />
@@ -91,21 +92,21 @@ export default function HomeScreen() {
                   {/* CATEGORY END */}
 
 
-                  <View style={tailwind`flex-1`}>
+                  <View style={tailwind`${tailwind_classes[1].safe_area}`}>
                         {foodCategories.map((myclass, index) => (
-                              <View key={index} style={tailwind`mb-5`}>                                    
-                                    <View style={tailwind`w-[90%] mx-auto flex-row justify-between items-start mb-1`}>
+                              <View key={index} style={tailwind``}>                                    
+                                    <View style={tailwind`${tailwind_classes[2].page} flex-row justify-between items-start mb-1`}>
                                           <View>
-                                                <Text style={tailwind`font-bold text-[15px] mb-1`}>{myclass.title}</Text>
-                                                <Text style={tailwind`font-light text-xs text-gray-600`}>{myclass.description}</Text>
+                                                <Text style={tailwind`${tailwind_classes[4].item_txt}`}>{myclass.title}</Text>
+                                                <Text style={tailwind`${tailwind_classes[1].p_font}`}>{myclass.description}</Text>
                                           </View>
                                           <TouchableOpacity>
-                                                <Text style={tailwind`text-[#F39300] font-light text-xs`}>View All</Text>
+                                                <Text style={tailwind`${tailwind_classes[4].items_vw_txt}`}>View All</Text>
                                           </TouchableOpacity>
                                     </View>
 
                                     {/* FOODLIST DISPLAY */}
-                                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tailwind`w-[90%] mx-auto mr-5`}>
+                                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={tailwind`${tailwind_classes[2].page}`}>
                                           {myclass.food.map((foods, index) => (
                                                 <DescFood food={foods} key={index}/>
                                                 
