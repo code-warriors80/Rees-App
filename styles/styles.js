@@ -4,7 +4,7 @@ export  const tailwind_classes = [
         frm_viewerr: 'border border-red-500',
         frm_input: 'flex-1 text-xs text-gray-400',
         frm_input_err: 'text-red-500',
-        frm_buttons: 'w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow mt-3 py-4',
+        frm_buttons: 'w-[90%] p-2 px-5 bg-[#F39300] mx-auto rounded-full shadow py-4',
         frm_buttons_txt: 'text-center text-white font-bold',
         frm_txt_1: 'text-right text-gray-500 text-xs mr-8',
         frm_txt_2: 'text-center text-gray-500 text-xs',
@@ -21,7 +21,7 @@ export  const tailwind_classes = [
     },
     {
         header_vw: 'flex-row items-center justify-between bg-white px-4 py-4',
-        header_lft_btn: 'bg-white p-2 rounded-full shadow-lg',
+        header_lft_btn: 'bg-white ',
         header_lft_img: 'w-5 h-5',
         header_txt: 'text-[16px] font-bold mx-auto',
         header_pro: 'flex-row items-center gap-2',

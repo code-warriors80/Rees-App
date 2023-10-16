@@ -14,9 +14,10 @@ import LocationScreen from '../screens/LocationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 
+
 export default function AppStack() {
   return (
-               <NavigationContainer>
+               <NavigationContainer linking={linking}>
                               <Stack.Navigator screenOptions={{
                                              headerShown: false
                               }}>

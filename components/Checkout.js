@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Image, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import axios from 'axios';
+import { Linking } from 'react-native';
+
+
 
 // ICON
 import FIcon from 'react-native-vector-icons/Feather'
@@ -14,16 +18,82 @@ import {useContext} from 'react'
 
 // REDUX
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCartItemIds, emptyCart } from '../slice/cartSlice';
+import { selectCartItemIds, emptyCart, selectCartItem } from '../slice/cartSlice';
 import { AuthContext } from '../context/AuthContext';
 import { tailwind_classes } from '../styles/styles'
 
 export default function CheckoutScreen({setModel, delivery, sumTotal}) {
   const {userInfo, Order} = useContext(AuthContext)
   const navigation = useNavigation()
+  const cartItems = useSelector(selectCartItem)
   const cartItemsById = useSelector(selectCartItemIds)
 
   const dispatch = useDispatch()
+  const generateRandomTxRef = () => {
+    const timestamp = new Date().getTime().toString(36);
+    const randomChars = Math.random().toString(36).substring(2, 8);
+    return `${timestamp}-${randomChars}`;
+  };
+  
+  const randomTxRef = generateRandomTxRef();
+
+  const initiatePayment = async () => {
+    if (cartItems.length < 1) {
+      console.log('Cart is empty. Add an item.');
+      return;  // Added return to exit the function if cart is empty
+    }
+  
+    try {
+      const redirectScheme = 'myapp://payment-callback';
+      const expoRedirect = 'exp://exp.host/--/';
+
+      const redirectURL = `${redirectScheme}?redirect=${encodeURIComponent(expoRedirect)}`;
+  
+      const payload = {
+        tx_ref: randomTxRef,
+        amount: sumTotal,
+        currency: 'NGN',
+        redirect_url: redirectURL,
+        meta: {
+          consumer_id: 23,
+          consumer_mac: '92a3-912ba-1192a'
+        },
+        customer: {
+          email: userInfo.user.email,
+          phonenumber: userInfo.user.mobile,
+          name: userInfo.user.username
+        },
+        customizations: {
+          title: 'Pied Piper Payments',
+          logo: 'http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png'
+        }
+      };
+  
+      const response = await axios.post(
+        'https://api.flutterwave.com/v3/payments',
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer FLWSECK_TEST-3af7fff02ac7d2d5f6f34606303ae77e-X`
+          }
+        }
+      );
+  
+      console.log('Payment initiated:', response.data);
+  
+      const checkoutUrl = response.data.data.link;
+      if (checkoutUrl) {
+        Linking.openURL(checkoutUrl);
+      } else {
+        console.error('Unable to open Flutterwave checkout URL.');
+      }
+    } catch (error) {
+      console.error('Error initiating payment:', error.response ? error.response.data : error.message);
+    }
+  };
+  
+
+  // () => Order(sumTotal, cartItemsById, cartEmpty)
 
   const cartEmpty = () => {
     dispatch(emptyCart())
@@ -112,7 +182,7 @@ export default function CheckoutScreen({setModel, delivery, sumTotal}) {
             </View>
             {/* ORDER TOTAL START */}
 
-            <TouchableOpacity style={tailwind`${tailwind_classes[3].tot_btn}`} onPress={() => Order(sumTotal, cartItemsById, cartEmpty)}>
+            <TouchableOpacity style={tailwind`${tailwind_classes[3].tot_btn}`} onPress={initiatePayment}>
               <Text style={tailwind`${tailwind_classes[3].tot_btn_txt}`}>Pay Now</Text>
             </TouchableOpacity>
         </View>
